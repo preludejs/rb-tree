@@ -31,19 +31,19 @@ const mk =
 const balance =
   <T>(_: N<T>): N<T> => {
     switch (true) {
-      case _?.c === B && _.l?.c === R && _.l?.l?.c === R: {
+      case _?.c === B && _.l?.c === R && _.l.l?.c === R: {
         const { l: { l: { l: a, v: x, r: b }, v: y, r: c }, v: z, r: d } = _ as any
         return mk(R, mk(B, a, x, b), y, mk(B, c, z, d))
       }
-      case _?.c === B && _.l?.c === R && _.l?.r?.c === R: {
+      case _?.c === B && _.l?.c === R && _.l.r?.c === R: {
         const { l: { l: a, v: x, r: { l: b, v: y, r: c } }, v: z, r: d } = _ as any
         return mk(R, mk(B, a, x, b), y, mk(B, c, z, d))
       }
-      case _?.c === B && _.r?.c === R && _.r?.l?.c === R: {
+      case _?.c === B && _.r?.c === R && _.r.l?.c === R: {
         const { l: a, v: x, r: { l: { l: b, v: y, r: c }, v: z, r: d } } = _ as any
         return mk(R, mk(B, a, x, b), y, mk(B, c, z, d))
       }
-      case _?.c === B && _.r?.c === R && _.r?.r?.c === R: {
+      case _?.c === B && _.r?.c === R && _.r.r?.c === R: {
         const { l: a, v: x, r: { l: b, v: y, r: { l: c, v: z, r: d } } } = _ as any
         return mk(R, mk(B, a, x, b), y, mk(B, c, z, d))
       }
