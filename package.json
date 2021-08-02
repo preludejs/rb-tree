@@ -1,0 +1,36 @@
+{
+  "name": "@prelude/rb-tree",
+  "version": "0.0.1",
+  "description": "Red-black tree module.",
+  "type": "module",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "tsc && NODE_OPTIONS=--experimental-vm-modules jest",
+    "update": "npx npm-check --update --save-exact"
+  },
+  "keywords": [
+    "prelude",
+    "std",
+    "lib",
+    "stdlib",
+    "library",
+    "cmp",
+    "compare",
+    "sort"
+  ],
+  "author": "Mirek Rusin (https://github.com/mirek)",
+  "license": "MIT",
+  "devDependencies": {
+    "@tsconfig/node14": "1.0.0",
+    "@types/jest": "26.0.23",
+    "eslint": "7.27.0",
+    "jest": "27.0.1",
+    "typescript": "4.2.4"
+  },
+  "dependencies": {
+    "@prelude/cmp": "0.1.1"
+  }
+}
