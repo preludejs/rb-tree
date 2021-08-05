@@ -22,3 +22,35 @@ test('random numbers', () => {
     last = _
   }
 })
+
+describe('pop', () => {
+
+  const n = 1_000_000
+  const rb = RbTree.of(RbTree.Cmp.numbers)
+  const xs: number[] = []
+
+  test(`insert ${n}`, () => {
+    for (let i = 0; i < n; i++) {
+      RbTree.insert(rb, Math.random())
+    }
+  })
+
+  test('pop all', () => {
+    while (true) {
+      const _ = RbTree.maybePop(rb)
+      if (_ === undefined) {
+        break
+      }
+      xs.push(_)
+    }
+    expect(xs).toHaveLength(n)
+  })
+
+  test('assert non descending', () => {
+    for (let i = 1; i < xs.length; i++) {
+      if (xs[i] <= xs[i - 1]) {
+        throw new Error(`${xs[i]} <= ${xs[i - 1]}`)
+      }
+    }
+  })
+})
