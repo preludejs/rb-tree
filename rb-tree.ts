@@ -19,27 +19,31 @@ export const of =
     root: E
   })
 
-const has_ =
-  <T>(n: N<T>, cmp: Cmp.t<T>, v: T): boolean => {
+const get_ =
+  <T>(n: N<T>, cmp: Cmp.t<T>, v: T): undefined | T => {
     if (n == null) {
-      return false
+      return undefined
     }
     const cmp_ = cmp(n.v, v)
     switch (cmp_) {
       case Cmp.asc:
-        return has_(n.r, cmp, v)
+        return get_(n.r, cmp, v)
       case Cmp.dsc:
-        return has_(n.l, cmp, v)
+        return get_(n.l, cmp, v)
       case Cmp.equal:
-        return true
+        return n.v
       default:
         throw new TypeError(`Expected cmp result, got ${cmp_}.`)
     }
   }
 
+export const get =
+  <T>(tree: RbTree<T>, value: T): undefined | T =>
+    get_(tree.root, tree.cmp, value)
+
 export const has =
   <T>(tree: RbTree<T>, value: T): boolean =>
-    has_(tree.root, tree.cmp, value)
+    get(tree, value) !== undefined
 
 const blacken =
   <T>(_: N<T>): N<T> => {
@@ -64,7 +68,7 @@ const blacken =
   }
 
 const insert_ =
-  <T>(_: N<T>, cmp: Cmp.t<T>, x: T): NonNullable<N<T>> => {
+  <T>(_: N<T>, cmp: Cmp.t<T>, x: T, merge: (a: T, b: T) => T): NonNullable<N<T>> => {
 
     // ins E = T R E x E
     if (_ === E) {
@@ -82,15 +86,20 @@ const insert_ =
 
       // | x < y = balance color (ins a) y b
       case Cmp.asc:
-        return balance(mk(c, insert_(a, cmp, x), y, b))
+        return balance(mk(c, insert_(a, cmp, x, merge), y, b))
 
       // | x == y = T color a y b
-      case Cmp.equal:
-        return mk(c, a, y, b)
+      case Cmp.equal: {
+        const v = merge(x, y)
+        if (cmp(y, v) !== Cmp.equal) {
+          throw new Error(`Merge can't produce non equal value, ${y} != ${v}.`)
+        }
+        return mk(c, a, v, b)
+      }
 
       // | x > y = balance color a y (ins b)
       case Cmp.dsc:
-        return balance(mk(c, a, y, insert_(b, cmp, x)))
+        return balance(mk(c, a, y, insert_(b, cmp, x, merge)))
 
       default:
         throw new TypeError(`Expected cmp result, got ${cmp_}.`)
@@ -98,8 +107,8 @@ const insert_ =
   }
 
 export const insert =
-  <T>(tree: RbTree<T>, value: NonNullable<T>): void => {
-    tree.root = blacken(insert_(tree.root, tree.cmp, value))
+  <T>(tree: RbTree<T>, value: NonNullable<T>, merge: (a: T, b: T) => T = _ => _): void => {
+    tree.root = blacken(insert_(tree.root, tree.cmp, value, merge))
   }
 
 const rotate =
