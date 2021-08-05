@@ -43,7 +43,7 @@ describe('pop', () => {
       }
       xs.push(_)
     }
-    expect(xs).toHaveLength(n)
+    expect(xs.length).toBe(n)
   })
 
   test('assert non descending', () => {
