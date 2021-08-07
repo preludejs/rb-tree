@@ -117,7 +117,10 @@ export const count =
     count_(tree.root)
 
 const delete_ =
-  <T, K>(tree: RbTree<T, K>, key: K): void =>
-    void (tree.root = delete__(redden(tree.root), tree.key, b => tree.cmp(key, b)))
+  <T, K>(tree: RbTree<T, K>, key: K): undefined | T => {
+    const [ v, r ] = delete__(redden(tree.root), tree.key, b => tree.cmp(key, b))
+    tree.root = r
+    return v
+  }
 
 export { delete_ as delete }

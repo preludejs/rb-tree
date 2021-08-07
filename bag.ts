@@ -21,29 +21,36 @@ export const of =
   })
 
 export const add =
-  <T>(bag: Bag<T>, value: T, count = 1): void =>
-    RbTree.insert(bag.tree, [ value, count ], merge)
+  <T>(bag: Bag<T>, key: T, count = 1): void =>
+    RbTree.insert(bag.tree, [ key, count ], merge)
 
 export const get =
-  <T>(bag: Bag<T>, value: T): number =>
-    RbTree.get(bag.tree, value)?.[1] ?? 0
+  <T>(bag: Bag<T>, key: T): number =>
+    RbTree.get(bag.tree, key)?.[1] ?? -0
 
-/** @returns -0 if value was not found, 0 if it was removed or count otherwise. */
-// export const remove =
-//   <T>(bag: Bag<T>, value: T): -0 | number => {
-//     const { tree } = bag
-//     const _ = RbTree.delete(bag.tree, [ value, 1 ])
-//     const _ = RbTree.maybeFind(bag.tree, value)
-//     if (!_) {
-//       return -0
-//     }
-//     const r = --_[1]
-//     if (r <= 0) {
-//       RbTree.delete(bag.tree, value)
-//     }
-//     return r
-//   }
+/**
+ * Removes `n` elements from multiset.
+ * @returns Negative number if element has been deleted, positive if it hasn't been deleted, -0 if didn't exist.
+ */
+export const remove =
+  <T>(bag: Bag<T>, key: T, n = 1): -0 | number => {
+    const _ = RbTree.get(bag.tree, key)
+    if (_) {
+      const r = _[1]
+      _[1] -= n
+      if (_[1] <= 0) {
+        RbTree.delete(bag.tree, key)
+        return -r
+      } else {
+        return n
+      }
+    } else {
+      return -0
+    }
+  }
 
-// const delete_ =
-//   <T>(bag: Bag<T>, value: T): number => {
-//   }
+const delete_ =
+  <T>(bag: Bag<T>, key: T): -0 | number =>
+    RbTree.delete(bag.tree, key)?.[1] ?? -0
+
+export { delete_ as delete }

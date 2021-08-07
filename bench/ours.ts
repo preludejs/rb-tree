@@ -1,5 +1,5 @@
 import * as RbTree from '../rb-tree.js'
-const t = RbTree.of(RbTree.Cmp.numbers)
+const t = RbTree.of(RbTree.Cmp.numbers, (_: number) => _)
 const before = Date.now()
 for (let i = 0; i < 1_000_000; i++) {
   RbTree.insert(t, Math.random())
