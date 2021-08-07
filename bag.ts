@@ -21,16 +21,18 @@ export const of =
   })
 
 export const add =
-  <T>(bag: Bag<T>, value: T): void =>
-    RbTree.insert(bag.tree, [ value, 1 ], merge)
+  <T>(bag: Bag<T>, value: T, count = 1): void =>
+    RbTree.insert(bag.tree, [ value, count ], merge)
 
 export const get =
   <T>(bag: Bag<T>, value: T): number =>
-    RbTree.get(bag.tree, [ value, 1 ])?.[1] ?? 0
+    RbTree.getValue(bag.tree, [ value, 1 ])?.[1] ?? 0
 
-// /** @returns -0 if value was not found, 0 if it was removed or count otherwise. */
+/** @returns -0 if value was not found, 0 if it was removed or count otherwise. */
 // export const remove =
 //   <T>(bag: Bag<T>, value: T): -0 | number => {
+//     const { tree } = bag
+//     const _ = RbTree.delete(bag.tree, [ value, 1 ])
 //     const _ = RbTree.maybeFind(bag.tree, value)
 //     if (!_) {
 //       return -0

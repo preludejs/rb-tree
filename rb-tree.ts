@@ -1,10 +1,12 @@
 import { R, B, BB, E, EE, N, M, mk } from './prelude.js'
 import * as Cmp from '@prelude/cmp'
-import balance from './balance.js'
+import balance from './balance-inlined.js'
 
 export {
   Cmp
 }
+
+export type CmpWithRight<T> = (b: T) => Cmp.R
 
 export type RbTree<T> = {
   cmp: Cmp.t<T>,
@@ -20,30 +22,34 @@ export const of =
   })
 
 const get_ =
-  <T>(n: N<T>, cmp: Cmp.t<T>, v: T): undefined | T => {
-    if (n == null) {
+  <T>(_: N<T>, cmp: CmpWithRight<T>): undefined | T => {
+    if (_ == null) {
       return undefined
     }
-    const cmp_ = cmp(n.v, v)
+    const cmp_ = cmp(_.v)
     switch (cmp_) {
       case Cmp.asc:
-        return get_(n.r, cmp, v)
-      case Cmp.dsc:
-        return get_(n.l, cmp, v)
+        return get_(_.l, cmp)
       case Cmp.equal:
-        return n.v
+        return _.v
+      case Cmp.dsc:
+        return get_(_.r, cmp)
       default:
         throw new TypeError(`Expected cmp result, got ${cmp_}.`)
     }
   }
 
 export const get =
-  <T>(tree: RbTree<T>, value: T): undefined | T =>
-    get_(tree.root, tree.cmp, value)
+  <T>(tree: RbTree<T>, cmp: CmpWithRight<T>): undefined | T =>
+    get_(tree.root, cmp)
 
-export const has =
+export const getValue =
+  <T>(tree: RbTree<T>, value: T): undefined | T =>
+    get_(tree.root, b => tree.cmp(value, b))
+
+export const hasValue =
   <T>(tree: RbTree<T>, value: T): boolean =>
-    get(tree, value) !== undefined
+    getValue(tree, value) !== undefined
 
 const blacken =
   <T>(_: N<T>): N<T> => {
@@ -193,27 +199,24 @@ const rotate =
     }
   }
 
-const pop_ =
+const shift_ =
   <T>(_: N<T>): [ undefined | T, N<T> ] => {
-    if (_ == null) {
-      return [ undefined, E ]
-    }
     switch (true) {
 
       // min_del (T R E x E) = (x,E)
-      case _.c === R && _.l === E && _.r === E: {
-        const { v: x } = _
+      case _?.c === R && _.l === E && _.r === E: {
+        const { v: x } = _!
         return [ x, E ]
       }
 
       // min_del (T B E x E) = (x,EE)
-      case _.c === B && _.l === E && _.r === E: {
-        const { v: x } = _
+      case _?.c === B && _.l === E && _.r === E: {
+        const { v: x } = _!
         return [ x, EE ]
       }
 
       // min_del (T B E x (T R E y E)) = (x,T B E y E)
-      case _.c === B && _.l === E && _.r?.c === R && _.r.l === E && _.r.r === E: {
+      case _?.c === B && _.l === E && _.r?.c === R && _.r.l === E && _.r.r === E: {
         const { v: x, r: { v: y } } = _ as any
         return [ x, mk(B, E, y, E) ]
       }
@@ -221,16 +224,23 @@ const pop_ =
       // min_del (T c a x b) = let (x’,a’) = min_del a
       // in (x’,rotate c a’ x b)
       default: {
-        const { c, l: a, v: x, r: b } = _
-        const [ x_, a_ ] = pop_(a)
+        const { c, l: a, v: x, r: b } = _!
+        const [ x_, a_ ] = shift_(a)
         return [ x_, rotate(mk(c, a_, x, b)) ]
       }
     }
   }
 
-export const maybePop =
+/**
+ * Shifts left-most element (ie. minimum element).
+ * @returns `undefined` or shifted element.
+ */
+export const maybeShift =
   <T>(tree: RbTree<T>): undefined | T => {
-    const [ x, a ] = pop_(tree.root)
+    if (tree.root == null) {
+      return undefined
+    }
+    const [ x, a ] = shift_(tree.root)
     tree.root = a
     if (tree.root) {
       tree.root.c = B
@@ -238,11 +248,15 @@ export const maybePop =
     return x
   }
 
-export const pop =
+/**
+ * @returns removed left-most element.
+ * @throws if tree is empty.
+ */
+export const shift =
   <T>(tree: RbTree<T>): T => {
-    const _ = maybePop(tree)
+    const _ = maybeShift(tree)
     if (_ === undefined) {
-      throw new Error('Error while trying to pop from empty rb-tree.')
+      throw new Error('Error while trying to shift an empty rb-tree.')
     }
     return _
   }
@@ -268,3 +282,84 @@ const count_ =
 export const count =
   <T>(tree: RbTree<T>): number =>
     count_(tree.root)
+
+// redden (T B (T B a x b) y (T B c z d)) = T R (T B a x b) y (T B c z d)
+// redden t = t
+const redden =
+  <T>(_: N<T>): N<T> =>
+    _?.c === B && _.l?.c === B && _.r?.c === B ?
+      mk(R, _.l, _.v, _.r) :
+      _
+
+const delete__ =
+  <T>(_: N<T>, cmp: Cmp.t<T>, x: T): N<T> => {
+    switch (true) {
+
+      // del E = E
+      case _ === E:
+        return E
+
+      case _ === EE:
+        throw new Error('Unexpected EE.')
+
+      // del (T R E y E) | x == y = E
+      //                 | x /= y = T R E y E
+      case _?.c === R && _.l === E && _.r === E:
+        return cmp(x, _!.v) === Cmp.equal ?
+          E :
+          _
+
+      // del (T B E y E) | x == y = EE
+      //                 | x /= y = T B E y E
+      case _?.c === B && _.l === E && _.r === E:
+        return cmp(x, _!.v) === Cmp.equal ?
+          EE :
+          _
+
+      // del (T B (T R E y E) z E)
+      // | x < z = T B (del (T R E y E)) z E
+      // | x == z = T B E y E
+      // | x > z = T B (T R E y E) z E
+      case _?.c === B && _.l?.c === R && _.l.l === E && _.l.r === E && _.r === E: {
+        const cmp_ = cmp(x, _!.v)
+        switch (cmp_) {
+          case Cmp.asc:
+            return mk(B, delete__(mk(R, E, _!.l!.v, E), cmp, x), _!.v, E)
+          case Cmp.equal:
+            return mk(B, E, _!.l!.v, E)
+          case Cmp.dsc:
+            return mk(B, mk(B, E, _!.l!.v, E), _!.v, E)
+          default:
+            throw new TypeError(`Expected cmp result, got ${cmp_}.`)
+        }
+      }
+
+      // del (T c a y b)
+      // | x < y = rotate c (del a) y b
+      // | x == y = let (y’,b’) = min_del b in rotate c a y’ b’
+      // | x > y = rotate c a y (del b)
+      default: {
+        const { c, l: a, v: y, r: b } = _ as any
+        const cmp_ = cmp(x, y)
+        switch (cmp_) {
+          case Cmp.asc:
+            return rotate(mk(c, delete__(a, cmp, x), y, b))
+          case Cmp.equal: {
+            const [ y_, b_ ] = shift_<T>(b)
+            return rotate(mk(c, a, y_!, b_))
+          }
+          case Cmp.dsc:
+            return rotate(mk(c, a, y, delete__(b, cmp, x)))
+          default:
+            throw new TypeError(`Expected cmp result, got ${cmp_}.`)
+        }
+      }
+
+    }
+  }
+
+const delete_ =
+  <T>(tree: RbTree<T>, value: T): void =>
+    void (tree.root = delete__(redden(tree.root), tree.cmp, value))
+
+export { delete_ as delete }

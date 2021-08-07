@@ -1,14 +1,19 @@
 import * as RbTree from '../rb-tree.js'
+import * as Arrays from '@prelude/array'
 
 test('basic', () => {
   const rb = RbTree.of(RbTree.Cmp.strings)
   RbTree.insert(rb, 'foo')
   RbTree.insert(rb, 'bar')
   RbTree.insert(rb, 'baz')
-  expect(RbTree.has(rb, 'foo')).toBe(true)
-  expect(RbTree.has(rb, 'bar')).toBe(true)
-  expect(RbTree.has(rb, 'baz')).toBe(true)
-  expect(RbTree.has(rb, 'bak')).toBe(false)
+  expect(RbTree.hasValue(rb, 'foo')).toBe(true)
+  expect(RbTree.hasValue(rb, 'bar')).toBe(true)
+  expect(RbTree.hasValue(rb, 'baz')).toBe(true)
+  expect(RbTree.hasValue(rb, 'bak')).toBe(false)
+  RbTree.delete(rb, 'foo')
+  expect(RbTree.hasValue(rb, 'foo')).toBe(false)
+  expect(RbTree.hasValue(rb, 'bar')).toBe(true)
+  expect(RbTree.hasValue(rb, 'baz')).toBe(true)
 })
 
 test('random numbers', () => {
@@ -37,7 +42,7 @@ describe('pop', () => {
 
   test('pop all', () => {
     while (true) {
-      const _ = RbTree.maybePop(rb)
+      const _ = RbTree.maybeShift(rb)
       if (_ === undefined) {
         break
       }
@@ -53,4 +58,30 @@ describe('pop', () => {
       }
     }
   })
+})
+
+describe('deletes', () => {
+  const n = 1_000
+  const rb = RbTree.of(RbTree.Cmp.numbers)
+  const xs: number[] = []
+
+  test(`insert ${n}`, () => {
+    for (let i = 0; i < n; i++) {
+      const value = Math.random()
+      xs.push(value)
+      RbTree.insert(rb, value)
+    }
+  })
+
+  test('deletions', () => {
+    expect(RbTree.count(rb)).toBe(n)
+    for (let i = 0; i < n; i++) {
+      const value = Arrays.deleteSwapRandom(xs)
+      expect(RbTree.hasValue(rb, value)).toBe(true)
+      RbTree.delete(rb, value)
+      expect(RbTree.hasValue(rb, value)).toBe(false)
+    }
+    expect(RbTree.count(rb)).toBe(0)
+  })
+
 })
