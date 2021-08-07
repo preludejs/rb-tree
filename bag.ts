@@ -10,14 +10,14 @@ const merge =
     [ a[0], a[1] + b[1] ]
 
 export type Bag<T> = {
-  tree: RbTree.t<E<T>>
+  tree: RbTree.t<E<T>, T>
 }
 
 export type t<T> = Bag<T>
 
 export const of =
   <T>(cmp: Cmp.t<T>):Bag<T> => ({
-    tree: RbTree.of((a, b) => cmp(a[0], b[0]))
+    tree: RbTree.of(cmp, (_: E<T>) => _[0])
   })
 
 export const add =
@@ -26,7 +26,7 @@ export const add =
 
 export const get =
   <T>(bag: Bag<T>, value: T): number =>
-    RbTree.getValue(bag.tree, [ value, 1 ])?.[1] ?? 0
+    RbTree.get(bag.tree, value)?.[1] ?? 0
 
 /** @returns -0 if value was not found, 0 if it was removed or count otherwise. */
 // export const remove =

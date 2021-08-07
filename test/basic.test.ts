@@ -1,23 +1,31 @@
 import * as RbTree from '../rb-tree.js'
 import * as Arrays from '@prelude/array'
 
-test('basic', () => {
-  const rb = RbTree.of(RbTree.Cmp.strings)
+test('basic values', () => {
+  const rb = RbTree.of(RbTree.Cmp.strings, (_: string) => _)
   RbTree.insert(rb, 'foo')
   RbTree.insert(rb, 'bar')
   RbTree.insert(rb, 'baz')
-  expect(RbTree.hasValue(rb, 'foo')).toBe(true)
-  expect(RbTree.hasValue(rb, 'bar')).toBe(true)
-  expect(RbTree.hasValue(rb, 'baz')).toBe(true)
-  expect(RbTree.hasValue(rb, 'bak')).toBe(false)
+  expect(RbTree.has(rb, 'foo')).toBe(true)
+  expect(RbTree.has(rb, 'bar')).toBe(true)
+  expect(RbTree.has(rb, 'baz')).toBe(true)
+  expect(RbTree.has(rb, 'bak')).toBe(false)
   RbTree.delete(rb, 'foo')
-  expect(RbTree.hasValue(rb, 'foo')).toBe(false)
-  expect(RbTree.hasValue(rb, 'bar')).toBe(true)
-  expect(RbTree.hasValue(rb, 'baz')).toBe(true)
+  expect(RbTree.has(rb, 'foo')).toBe(false)
+  expect(RbTree.has(rb, 'bar')).toBe(true)
+  expect(RbTree.has(rb, 'baz')).toBe(true)
+})
+
+test('complex elements', () => {
+  type E = { key: string, value: unknown }
+  const tree = RbTree.of(RbTree.Cmp.strings, (_: E) => _.key)
+  RbTree.insert(tree, { key: 'foo', value: 'FOO' })
+  expect(RbTree.has(tree, 'foo')).toBe(true)
+  expect(RbTree.has(tree, 'bar')).toBe(false)
 })
 
 test('random numbers', () => {
-  const rb = RbTree.of(RbTree.Cmp.numbers)
+  const rb = RbTree.of(RbTree.Cmp.numbers, (_: number) => _)
   for (let i = 0; i < 100; i++) {
     RbTree.insert(rb, Math.random())
   }
@@ -31,7 +39,7 @@ test('random numbers', () => {
 describe('pop', () => {
 
   const n = 1_000_000
-  const rb = RbTree.of(RbTree.Cmp.numbers)
+  const rb = RbTree.of(RbTree.Cmp.numbers, (_: number) => _)
   const xs: number[] = []
 
   test(`insert ${n}`, () => {
@@ -62,7 +70,7 @@ describe('pop', () => {
 
 describe('deletes', () => {
   const n = 1_000
-  const rb = RbTree.of(RbTree.Cmp.numbers)
+  const rb = RbTree.of(RbTree.Cmp.numbers, (_: number) => _)
   const xs: number[] = []
 
   test(`insert ${n}`, () => {
@@ -77,9 +85,9 @@ describe('deletes', () => {
     expect(RbTree.count(rb)).toBe(n)
     for (let i = 0; i < n; i++) {
       const value = Arrays.deleteSwapRandom(xs)
-      expect(RbTree.hasValue(rb, value)).toBe(true)
+      expect(RbTree.has(rb, value)).toBe(true)
       RbTree.delete(rb, value)
-      expect(RbTree.hasValue(rb, value)).toBe(false)
+      expect(RbTree.has(rb, value)).toBe(false)
     }
     expect(RbTree.count(rb)).toBe(0)
   })
