@@ -108,13 +108,14 @@ export const each =
   <T, K>(tree: RbTree<T, K>): Generator<T> =>
     each_(tree.root)
 
-const count_ =
+const linearCount_ =
   <T>(_: N<T>): number =>
-    _ ? 1 + count_(_.l) + count_(_.r) : 0
+    _ ? 1 + linearCount_(_.l) + linearCount_(_.r) : 0
 
-export const count =
+/** @returns count of elements with _O(n)_ complexity. */
+export const linearCount =
   <T, K>(tree: RbTree<T, K>): number =>
-    count_(tree.root)
+    linearCount_(tree.root)
 
 const delete_ =
   <T, K>(tree: RbTree<T, K>, key: K): undefined | T => {
