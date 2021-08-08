@@ -97,3 +97,39 @@ describe('deletes', () => {
   })
 
 })
+
+describe('range count', () => {
+
+  const n = 10_000
+  const rb = RbTree.of(RbTree.Cmp.numbers, (_: number) => _)
+  const xs = Arrays.of(n, _ => _ + 1)
+
+  test('insert', () => {
+    for (const x of xs) {
+      RbTree.insert(rb, x)
+    }
+    expect(Array.from(RbTree.each(rb))).toEqual(Arrays.of(n, _ => _ + 1))
+  })
+
+  test('range', () => {
+    expect(RbTree.count(rb, { $l: 2.9 })).toBe(2)
+    expect(RbTree.count(rb, { $le: 3.1 })).toBe(3)
+    expect(RbTree.count(rb, { $l: 3.1 })).toBe(3)
+    expect(RbTree.count(rb, { $le: 0 })).toBe(0)
+    expect(RbTree.count(rb, { $l: 0 })).toBe(0)
+    expect(RbTree.count(rb, { $le: n + 1 })).toBe(n)
+    expect(RbTree.count(rb, { $l: n + 1 })).toBe(n)
+    expect(RbTree.count(rb, { $r: 0 })).toBe(n)
+    expect(RbTree.count(rb, { $r: 1 })).toBe(n - 1)
+    expect(RbTree.count(rb, { $re: 1 })).toBe(n)
+    expect(RbTree.count(rb, { $r: 1.5 })).toBe(n - 1)
+    expect(RbTree.count(rb, { $re: 1.5 })).toBe(n - 1)
+    for (let i = 1; i < n; i++) {
+      expect(RbTree.count(rb, { $l: i })).toBe(i - 1)
+      expect(RbTree.count(rb, { $le: i })).toBe(i)
+      expect(RbTree.count(rb, { $r: i })).toBe(n - i)
+      expect(RbTree.count(rb, { $re: i })).toBe(n - (i - 1))
+    }
+  })
+
+})

@@ -21,6 +21,10 @@ export type RbTree<T, K> = {
 
 export type t<T, K> = RbTree<T, K>
 
+export type Query<K> =
+  | undefined
+  | ({} | { $l: K } | { $le: K } & ({} | { $r: K } | { $re: K }))
+
 export const of =
   <T, K>(cmp: Cmp.t<K>, key: ((value: T) => K)): RbTree<T, K> => ({
     cmp,
@@ -108,9 +112,43 @@ export const each =
   <T, K>(tree: RbTree<T, K>): Generator<T> =>
     each_(tree.root)
 
+export const countLeft_ =
+  <T, K>(_: N<T>, key: (value: T) => K, cmp: CmpWithRight<K>, inclusive: boolean): number => {
+    if (!_) {
+      return 0
+    }
+    const cmp_ = cmp(key(_.v))
+    switch (cmp_) {
+      case Cmp.asc:
+        return countLeft_(_.l, key, cmp, inclusive)
+      case Cmp.equal:
+        return (_.l?.n ?? 0) + (inclusive ? 1 : 0)
+      case Cmp.dsc:
+        return _.n - (_.r?.n ?? 0) + countLeft_(_.r, key, cmp, inclusive)
+      default:
+        throw new TypeError(`Expected cmp result, got ${cmp_}.`)
+      }
+  }
+
 export const count =
-  <T, K>(tree: RbTree<T, K>): number =>
-    tree.root?.n ?? 0
+  <T, K>(tree: RbTree<T, K>, query?: Query<K>): number => {
+    const n = tree.root?.n ?? 0
+    if (query === undefined) {
+      return n
+    }
+    const cl =
+      (k: K, e: boolean): number =>
+        countLeft_(tree.root, tree.key, b => tree.cmp(k, b), e)
+
+    // How many to remove?
+    const a = '$l' in query ? n - cl(query.$l, false) : 0
+    const b = '$le' in query ? n - cl(query.$le, true) : 0
+    const c = '$r' in query ? cl(query.$r, true) : 0
+    const d = '$re' in query ? cl(query.$re, false) : 0
+    const x = Math.max(a, b)
+    const y = Math.max(c, d)
+    return n - x - y
+  }
 
 const delete_ =
   <T, K>(tree: RbTree<T, K>, key: K): undefined | T => {
