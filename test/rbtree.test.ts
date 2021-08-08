@@ -124,6 +124,7 @@ describe('range count', () => {
     expect(RbTree.count(rb, { $re: 1 })).toBe(n)
     expect(RbTree.count(rb, { $r: 1.5 })).toBe(n - 1)
     expect(RbTree.count(rb, { $re: 1.5 })).toBe(n - 1)
+    expect(RbTree.count(rb, { $r: 3.5, $l: 7.1 })).toBe(4)
     for (let i = 1; i < n; i++) {
       expect(RbTree.count(rb, { $l: i })).toBe(i - 1)
       expect(RbTree.count(rb, { $le: i })).toBe(i)
