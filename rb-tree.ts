@@ -112,15 +112,6 @@ export const count =
   <T, K>(tree: RbTree<T, K>): number =>
     tree.root?.n ?? 0
 
-const linearCount_ =
-  <T>(_: N<T>): number =>
-    _ ? 1 + linearCount_(_.l) + linearCount_(_.r) : 0
-
-/** @returns count of elements with _O(n)_ complexity. */
-export const linearCount =
-  <T, K>(tree: RbTree<T, K>): number =>
-    linearCount_(tree.root)
-
 const delete_ =
   <T, K>(tree: RbTree<T, K>, key: K): undefined | T => {
     const [ v, r ] = delete__(redden(tree.root), tree.key, b => tree.cmp(key, b))

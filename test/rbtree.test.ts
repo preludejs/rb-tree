@@ -85,7 +85,6 @@ describe('deletes', () => {
   })
 
   test('deletions', () => {
-    expect(RbTree.linearCount(rb)).toBe(n)
     expect(RbTree.count(rb)).toBe(n)
     for (let i = 0; i < n; i++) {
       const value = Arrays.deleteSwapRandom(xs)
@@ -94,7 +93,6 @@ describe('deletes', () => {
       expect(RbTree.has(rb, value)).toBe(false)
       expect(RbTree.count(rb)).toBe(n - (i + 1))
     }
-    expect(RbTree.linearCount(rb)).toBe(0)
     expect(RbTree.count(rb)).toBe(0)
   })
 
