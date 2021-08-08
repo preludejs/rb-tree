@@ -56,3 +56,17 @@ export const keys =
       yield _[0]
     }
   }
+
+export const values =
+  function* <K, V>(map: Map_<K, V>): Generator<V> {
+    for (const _ of RbTree.each(map.tree)) {
+      yield _[1]
+    }
+  }
+
+export const entries =
+  function* <K, V>(map: Map_<K, V>): Generator<[K, V]> {
+    for (const _ of RbTree.each(map.tree)) {
+      yield [ _[0], _[1] ]
+    }
+  }

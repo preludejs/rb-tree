@@ -22,4 +22,20 @@ test('simple', () => {
     'three',
     'two'
   ])
+  expect(Array.from(Map_.values(map))).toEqual([
+    5,
+    4,
+    1,
+    6,
+    3,
+    2
+  ])
+  expect(Array.from(Map_.entries(map))).toEqual([
+    [ 'five', 5 ],
+    [ 'four', 4 ],
+    [ 'one', 1 ],
+    [ 'six', 6 ],
+    [ 'three', 3 ],
+    [ 'two', 2 ]
+  ])
 })
