@@ -1,6 +1,6 @@
 import { R, E, EE, N, mk } from './prelude.js'
 import * as Cmp from '@prelude/cmp'
-import balance from './balance-inlined.js'
+import balance from './balance.js'
 
 const insert =
   <T, K>(_: N<T>, key: (value: T) => K, cmp: Cmp.t<K>, x: T, merge: (a: T, b: T) => T): NonNullable<N<T>> => {

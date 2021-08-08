@@ -108,6 +108,10 @@ export const each =
   <T, K>(tree: RbTree<T, K>): Generator<T> =>
     each_(tree.root)
 
+export const count =
+  <T, K>(tree: RbTree<T, K>): number =>
+    tree.root?.n ?? 0
+
 const linearCount_ =
   <T>(_: N<T>): number =>
     _ ? 1 + linearCount_(_.l) + linearCount_(_.r) : 0

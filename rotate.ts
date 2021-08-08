@@ -1,5 +1,5 @@
 import { R, B, BB, E, EE, M, mk } from './prelude.js'
-import balance from './balance-inlined.js'
+import balance from './balance.js'
 
 const rotate =
   <T>(_: M<T>): M<T> => {

@@ -38,13 +38,16 @@ test('random numbers', () => {
 
 describe('pop', () => {
 
-  const n = 1_000_000
+  const n = 1_000
   const rb = RbTree.of(RbTree.Cmp.numbers, (_: number) => _)
   const xs: number[] = []
 
   test(`insert ${n}`, () => {
     for (let i = 0; i < n; i++) {
       RbTree.insert(rb, Math.random())
+      if (rb.root?.n !== i + 1) {
+        throw new Error(`${rb.root?.n} != ${i + 1}`)
+      }
     }
   })
 
@@ -83,13 +86,16 @@ describe('deletes', () => {
 
   test('deletions', () => {
     expect(RbTree.linearCount(rb)).toBe(n)
+    expect(RbTree.count(rb)).toBe(n)
     for (let i = 0; i < n; i++) {
       const value = Arrays.deleteSwapRandom(xs)
       expect(RbTree.has(rb, value)).toBe(true)
       RbTree.delete(rb, value)
       expect(RbTree.has(rb, value)).toBe(false)
+      expect(RbTree.count(rb)).toBe(n - (i + 1))
     }
     expect(RbTree.linearCount(rb)).toBe(0)
+    expect(RbTree.count(rb)).toBe(0)
   })
 
 })
