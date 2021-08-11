@@ -21,8 +21,8 @@ export const of =
   })
 
 export const add =
-  <T>(bag: Bag<T>, key: T, count = 1): void =>
-    RbTree.insert(bag.tree, [ key, count ], merge)
+  <T>(bag: Bag<T>, key: T, n = 1): void =>
+    RbTree.insert(bag.tree, [ key, n ], n, merge)
 
 export const get =
   <T>(bag: Bag<T>, key: T): number =>

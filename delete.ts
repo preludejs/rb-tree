@@ -36,14 +36,14 @@ const delete_ =
         const cmp_ = cmp1(key(_!.v))
         switch (cmp_) {
           case Cmp.asc: {
-            const [ v, r ] = delete_(mk(R, E, _!.l!.v, E), key, cmp1)
-            return [ v, mk(B, r, _!.v, E) ]
+            const [ v, r ] = delete_(mk(R, E, _!.l!.v, _!.l!.n, E), key, cmp1)
+            return [ v, mk(B, r, _!.v, _!.n, E) ]
           }
           case Cmp.equal:
-            return [ _!.v, mk(B, E, _!.l!.v, E) ]
+            return [ _!.v, mk(B, E, _!.l!.v, _!.l!.n, E) ]
           case Cmp.dsc:
             // _ ??
-            return [ undefined, mk(B, mk(B, E, _!.l!.v, E), _!.v, E) ]
+            return [ undefined, mk(B, mk(B, E, _!.l!.v, _!.l!.n, E), _!.v, _!.n, E) ]
           default:
             throw new TypeError(`Expected cmp result, got ${cmp_}.`)
         }
@@ -54,20 +54,20 @@ const delete_ =
       // | x == y = let (y’,b’) = min_del b in rotate c a y’ b’
       // | x > y = rotate c a y (del b)
       default: {
-        const { c, l: a, v: y, r: b } = _ as any
+        const { c, l: a, v: y, n: j, r: b } = _ as any
         const cmp_ = cmp1(y)
         switch (cmp_) {
           case Cmp.asc: {
             const [ v, r ] = delete_(a, key, cmp1)
-            return [ v, rotate(mk(c, r, y, b)) ]
+            return [ v, rotate(mk(c, r, y, j, b)) ]
           }
           case Cmp.equal: {
-            const [ y_, b_ ] = shift<T>(b)
-            return [ y, rotate(mk(c, a, y_!, b_)) ]
+            const [ y_, j_, b_ ] = shift<T>(b)
+            return [ y, rotate(mk(c, a, y_!, j_, b_)) ]
           }
           case Cmp.dsc: {
             const [ v, r ] = delete_(b, key, cmp1)
-            return [ v, rotate(mk(c, a, y, r)) ]
+            return [ v, rotate(mk(c, a, y, j, r)) ]
           }
           default:
             throw new TypeError(`Expected cmp result, got ${cmp_}.`)

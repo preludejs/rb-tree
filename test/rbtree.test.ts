@@ -45,15 +45,15 @@ describe('pop', () => {
   test(`insert ${n}`, () => {
     for (let i = 0; i < n; i++) {
       RbTree.insert(rb, Math.random())
-      if (rb.root?.n !== i + 1) {
-        throw new Error(`${rb.root?.n} != ${i + 1}`)
+      if (rb.root?.s !== i + 1) {
+        throw new Error(`${rb.root?.s} != ${i + 1}`)
       }
     }
   })
 
   test('pop all', () => {
     while (true) {
-      const _ = RbTree.maybeShift(rb)
+      const [ _ ] = RbTree.maybeShiftCount(rb)
       if (_ === undefined) {
         break
       }

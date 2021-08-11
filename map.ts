@@ -17,7 +17,7 @@ export const of =
 
 export const set =
   <K, V>(map: Map_<K, V>, key: K, value: V): void =>
-    RbTree.insert(map.tree, [ key, value ], _ => _)
+    RbTree.insert(map.tree, [ key, value ], 0, _ => _)
 
 export const maybeGet =
   <K, V>(map: Map_<K, V>, key: K): undefined | V =>
