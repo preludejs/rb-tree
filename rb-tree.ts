@@ -33,16 +33,16 @@ export const of =
   })
 
 const get_ =
-  <T, K>(_: N<T>, key: (value: T) => K, cmp: CmpWithRight<K>): undefined | T => {
+  <T, K>(_: N<T>, key: (value: T) => K, cmp: CmpWithRight<K>): [ undefined | T, number ] => {
     if (_ == null) {
-      return undefined
+      return [ undefined, -0 ]
     }
     const cmp_ = cmp(key(_.v))
     switch (cmp_) {
       case Cmp.asc:
         return get_(_.l, key, cmp)
       case Cmp.equal:
-        return _.v
+        return [ _.v, _.n ]
       case Cmp.dsc:
         return get_(_.r, key, cmp)
       default:
@@ -51,12 +51,20 @@ const get_ =
   }
 
 export const get =
-  <T, K>(tree: RbTree<T, K>, key: K): undefined | T =>
+  <T, K>(tree: RbTree<T, K>, key: K): [ undefined | T, number ] =>
     get_(tree.root, tree.key, b => tree.cmp(key, b))
+
+export const getv =
+  <T, K>(tree: RbTree<T, K>, key: K): undefined | T =>
+    get(tree, key)[0]
+
+export const getc =
+  <T, K>(tree: RbTree<T, K>, key: K): number =>
+    get(tree, key)[1]
 
 export const has =
   <T, K>(tree: RbTree<T, K>, key: K): boolean =>
-    get(tree, key) !== undefined
+    getc(tree, key) > 0
 
 /**
  * Inserts provided `value`.
@@ -157,10 +165,10 @@ export const count =
   }
 
 const delete_ =
-  <T, K>(tree: RbTree<T, K>, key: K): undefined | T => {
-    const [ v, r ] = delete__(redden(tree.root), tree.key, b => tree.cmp(key, b))
+  <T, K>(tree: RbTree<T, K>, key: K, i = 1): [ undefined | T, number ] => {
+    const [ v, n, r ] = delete__(redden(tree.root), tree.key, b => tree.cmp(key, b), i)
     tree.root = r
-    return v
+    return [ v, n ]
   }
 
 export { delete_ as delete }

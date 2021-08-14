@@ -7,7 +7,7 @@ export type P = typeof R | typeof B | typeof BB
 export const E = undefined
 export const EE = null
 export type N<T> = typeof E | typeof EE | {
-  c: 1 | 2 | 3,
+  c: P,
   l: N<T>,
   v: T,
   n: number,
@@ -16,6 +16,7 @@ export type N<T> = typeof E | typeof EE | {
 }
 
 export type M<T> = NonNullable<N<T>>
+export type O<T, L, R = N<T>> = { c: P, l: L, v: T, n: number, r: R, s: number }
 
 export const mk =
   <T>(c: P, l: N<T>, v: T, n: number, r: N<T>): M<T> => {

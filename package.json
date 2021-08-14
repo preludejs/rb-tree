@@ -24,7 +24,7 @@
   "author": "Mirek Rusin (https://github.com/mirek)",
   "license": "MIT",
   "devDependencies": {
-    "@prelude/array": "0.1.1",
+    "@prelude/array": "0.1.2",
     "@tsconfig/node16": "1.0.2",
     "@types/jest": "26.0.24",
     "eslint": "7.32.0",

@@ -1,4 +1,4 @@
-import * as Bag from '../bag'
+import * as Bag from '../bag.js'
 
 test('simple', () => {
   const bag = Bag.of(Bag.Cmp.strings)
@@ -14,5 +14,5 @@ test('simple', () => {
   expect(Bag.remove(bag, 'bar', 2)).toBe(2)
   expect(Bag.get(bag, 'bar')).toBe(3)
   expect(Bag.remove(bag, 'bar', 4)).toBe(-3)
-  expect(Bag.get(bag, 'bar')).toBe(-0)
+  expect(Bag.get(bag, 'bar')).toBe(-1)
 })
