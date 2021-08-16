@@ -33,16 +33,16 @@ export const of =
   })
 
 const get_ =
-  <T, K>(_: N<T>, key: (value: T) => K, cmp: CmpWithRight<K>): undefined | T => {
+  <T, K>(_: N<T>, key: (value: T) => K, cmp: CmpWithRight<K>): [ undefined | T, number ] => {
     if (_ == null) {
-      return undefined
+      return [ undefined, -0 ]
     }
     const cmp_ = cmp(key(_.v))
     switch (cmp_) {
       case Cmp.asc:
         return get_(_.l, key, cmp)
       case Cmp.equal:
-        return _.v
+        return [ _.v, _.n ]
       case Cmp.dsc:
         return get_(_.r, key, cmp)
       default:
@@ -51,52 +51,65 @@ const get_ =
   }
 
 export const get =
-  <T, K>(tree: RbTree<T, K>, key: K): undefined | T =>
+  <T, K>(tree: RbTree<T, K>, key: K): [ undefined | T, number ] =>
     get_(tree.root, tree.key, b => tree.cmp(key, b))
+
+export const getv =
+  <T, K>(tree: RbTree<T, K>, key: K): undefined | T =>
+    get(tree, key)[0]
+
+export const getc =
+  <T, K>(tree: RbTree<T, K>, key: K): number =>
+    get(tree, key)[1]
 
 export const has =
   <T, K>(tree: RbTree<T, K>, key: K): boolean =>
-    get(tree, key) !== undefined
+    getc(tree, key) > 0
 
 /**
  * Inserts provided `value`.
  * If element already exists, `merge` is used to produce final element (defaults to identity function).
  */
 export const insert =
-  <T, K>(tree: RbTree<T, K>, element: NonNullable<T>, merge: (a: T, b: T) => T = _ => _): void => {
-    tree.root = blacken(insert_(tree.root, tree.key, tree.cmp, element, merge))
+  <T, K>(tree: RbTree<T, K>, element: NonNullable<T>, n = 1, merge: (a: T, b: T) => T = _ => _): void => {
+    tree.root = blacken(insert_(tree.root, tree.key, tree.cmp, element, n, merge))
   }
 
 /**
  * Shifts left-most element (ie. minimum element).
  * @returns `undefined` or shifted element.
  */
-export const maybeShift =
-  <T, K>(tree: RbTree<T, K>): undefined | T => {
+// TODO: shiftSame
+export const maybeShiftCount =
+  <T, K>(tree: RbTree<T, K>): [ undefined | T, number ] => {
     if (tree.root == null) {
-      return undefined
+      return [ undefined, 0]
     }
-    const [ x, a ] = shift_(tree.root)
+    const [ x, i, a ] = shift_(tree.root)
     tree.root = a
     // ??
     if (tree.root) {
       tree.root.c = B
     }
-    return x
+    return [ x, i ]
   }
 
 /**
  * @returns removed left-most element.
  * @throws if tree is empty.
  */
-export const shift =
-  <T, K>(tree: RbTree<T, K>): T => {
-    const _ = maybeShift(tree)
-    if (_ === undefined) {
+export const shiftCount =
+  <T, K>(tree: RbTree<T, K>): [ T, number ] => {
+    const [ x, i ] = maybeShiftCount(tree)
+    if (x === undefined) {
       throw new Error('Error while trying to shift an empty rb-tree.')
     }
-    return _
+    return [ x, i ]
   }
+
+export const shift =
+  <T, K>(tree: RbTree<T, K>): T =>
+    shiftCount(tree)[0]
 
 const each_ =
   function* <T>(n: N<T>): Generator<T> {
@@ -108,6 +121,7 @@ const each_ =
     yield *each_(n.r)
   }
 
+// TODO: eachCount
 export const each =
   <T, K>(tree: RbTree<T, K>): Generator<T> =>
     each_(tree.root)
@@ -122,9 +136,9 @@ export const countLeft_ =
       case Cmp.asc:
         return countLeft_(_.l, key, cmp, inclusive)
       case Cmp.equal:
-        return (_.l?.n ?? 0) + (inclusive ? 1 : 0)
+        return (_.l?.s ?? 0) + (inclusive ? _.n : 0)
       case Cmp.dsc:
-        return _.n - (_.r?.n ?? 0) + countLeft_(_.r, key, cmp, inclusive)
+        return _.s - (_.r?.s ?? 0) + countLeft_(_.r, key, cmp, inclusive)
       default:
         throw new TypeError(`Expected cmp result, got ${cmp_}.`)
       }
@@ -132,7 +146,7 @@ export const countLeft_ =
 
 export const count =
   <T, K>(tree: RbTree<T, K>, query?: Query<K>): number => {
-    const n = tree.root?.n ?? 0
+    const n = tree.root?.s ?? 0
     if (query === undefined) {
       return n
     }
@@ -151,10 +165,10 @@ export const count =
   }
 
 const delete_ =
-  <T, K>(tree: RbTree<T, K>, key: K): undefined | T => {
-    const [ v, r ] = delete__(redden(tree.root), tree.key, b => tree.cmp(key, b))
+  <T, K>(tree: RbTree<T, K>, key: K, i = 1): [ undefined | T, number ] => {
+    const [ v, n, r ] = delete__(redden(tree.root), tree.key, b => tree.cmp(key, b), i)
     tree.root = r
-    return v
+    return [ v, n ]
   }
 
 export { delete_ as delete }

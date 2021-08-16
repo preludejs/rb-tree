@@ -7,16 +7,26 @@ export type P = typeof R | typeof B | typeof BB
 export const E = undefined
 export const EE = null
 export type N<T> = typeof E | typeof EE | {
-  c: 1 | 2 | 3,
+  c: P,
   l: N<T>,
   v: T,
+  n: number,
   r: N<T>,
-  n: number
+  s: number // n + l.s + r.s
 }
 
 export type M<T> = NonNullable<N<T>>
+export type O<T, L, R = N<T>> = { c: P, l: L, v: T, n: number, r: R, s: number }
 
 export const mk =
-  <T>(c: P, l: N<T>, v: T, r: N<T>): M<T> => ({
-    c, l, v, r, n: 1 + (l?.n ?? 0) + (r?.n ?? 0)
-  })
+  <T>(c: P, l: N<T>, v: T, n: number, r: N<T>): M<T> => {
+    const s = n + (l?.s ?? 0) + (r?.s ?? 0)
+    if (!Number.isSafeInteger(s)) {
+      throw new Error(`s is not safe integer, ${JSON.stringify({
+        c, l, v, n, r, s
+      }, null, 2)}`)
+    }
+    return ({
+      c, l, v, n, r, s
+    })
+  }

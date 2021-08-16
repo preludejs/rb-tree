@@ -1,49 +1,59 @@
-import { R, B, E, EE, N, mk } from './prelude.js'
+import { R, B, E, EE, N, M, O, mk } from './prelude.js'
 import * as Cmp from '@prelude/cmp'
 import rotate from './rotate.js'
 import shift from './shift.js'
 
 const delete_ =
-  <T, K>(_: N<T>, key: (value: T) => K, cmp1: Cmp.Cmp1<K>): [ undefined | T, N<T> ] => {
+  <T, K>(_: N<T>, key: (value: T) => K, cmp1: Cmp.Cmp1<K>, i: number): [ undefined | T, number, N<T> ] => {
     switch (true) {
 
       // del E = E
       case _ === E:
-        return [ undefined, E ]
+        return [ undefined, 0, E ]
 
       case _ === EE:
         throw new Error('Unexpected EE.')
 
       // del (T R E y E) | x == y = E
       //                 | x /= y = T R E y E
-      case _?.c === R && _.l === E && _.r === E:
-        return cmp1(key(_!.v)) === Cmp.equal ?
-          [ _!.v, E ] :
-          [ undefined, _ ]
+      case _?.c === R && _.l === E && _.r === E: {
+        const { v: y, n: j } = _ as M<T>
+        return cmp1(key(y)) === Cmp.equal ?
+          j <= i ?
+            [ y, j - i, E ] :
+            [ undefined, j - i, mk(R, E, y, j - i, E) ] :
+          [ undefined, 0, _ ]
+      }
 
       // del (T B E y E) | x == y = EE
       //                 | x /= y = T B E y E
-      case _?.c === B && _.l === E && _.r === E:
-        return cmp1(key(_!.v)) === Cmp.equal ?
-          [ _!.v, EE ] :
-          [ undefined, _ ]
+      case _?.c === B && _.l === E && _.r === E: {
+        const { v: y, n: j } = _ as M<T>
+        return cmp1(key(y)) === Cmp.equal ?
+          j <= i ?
+            [ y, j - i, EE ] :
+            [ undefined, j - i, mk(B, E, y, j - i, E) ] :
+          [ undefined, 0, _ ]
+      }
 
       // del (T B (T R E y E) z E)
       // | x < z = T B (del (T R E y E)) z E
       // | x == z = T B E y E
       // | x > z = T B (T R E y E) z E
       case _?.c === B && _.l?.c === R && _.l.l === E && _.l.r === E && _.r === E: {
-        const cmp_ = cmp1(key(_!.v))
+        const { l: { v: y, n: j }, v: z, n: k } = _ as O<T, M<T>>
+        const cmp_ = cmp1(key(z))
         switch (cmp_) {
           case Cmp.asc: {
-            const [ v, r ] = delete_(mk(R, E, _!.l!.v, E), key, cmp1)
-            return [ v, mk(B, r, _!.v, E) ]
+            const [ v, n, r ] = delete_(mk(R, E, y, j, E), key, cmp1, i)
+            return [ v, n, mk(B, r, _!.v, _!.n, E) ] // TODO: ?
           }
           case Cmp.equal:
-            return [ _!.v, mk(B, E, _!.l!.v, E) ]
+            return i >= k ?
+              [ z, k - i, mk(B, E, y, j, E) ] :
+              [ z, k - i, mk(B, mk(R, E, y, j, E), z, k - i, E) ]
           case Cmp.dsc:
-            // _ ??
-            return [ undefined, mk(B, mk(B, E, _!.l!.v, E), _!.v, E) ]
+            return [ undefined, 0, _ ]
           default:
             throw new TypeError(`Expected cmp result, got ${cmp_}.`)
         }
@@ -54,20 +64,20 @@ const delete_ =
       // | x == y = let (y’,b’) = min_del b in rotate c a y’ b’
       // | x > y = rotate c a y (del b)
       default: {
-        const { c, l: a, v: y, r: b } = _ as any
-        const cmp_ = cmp1(y)
+        const { c, l: a, v: y, n: j, r: b } = _ as M<T>
+        const cmp_ = cmp1(key(y))
         switch (cmp_) {
           case Cmp.asc: {
-            const [ v, r ] = delete_(a, key, cmp1)
-            return [ v, rotate(mk(c, r, y, b)) ]
+            const [ v, n, r ] = delete_(a, key, cmp1, i)
+            return [ v, n, rotate(mk(c, r, y, j, b)) ]
           }
           case Cmp.equal: {
-            const [ y_, b_ ] = shift<T>(b)
-            return [ y, rotate(mk(c, a, y_!, b_)) ]
+            const [ y_, j_, b_ ] = shift<T>(b)
+            return [ y, j_, rotate(mk(c, a, y_!, j_, b_)) ]
           }
           case Cmp.dsc: {
-            const [ v, r ] = delete_(b, key, cmp1)
-            return [ v, rotate(mk(c, a, y, r)) ]
+            const [ v, n, r ] = delete_(b, key, cmp1, i)
+            return [ v, n, rotate(mk(c, a, y, j, r)) ]
           }
           default:
             throw new TypeError(`Expected cmp result, got ${cmp_}.`)

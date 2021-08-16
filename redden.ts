@@ -5,7 +5,7 @@ import { R, B, N, mk } from './prelude.js'
 const redden =
   <T>(_: N<T>): N<T> =>
     _?.c === B && _.l?.c === B && _.r?.c === B ?
-      mk(R, _.l, _.v, _.r) :
+      mk(R, _.l, _.v, _.n, _.r) :
       _
 
 export default redden
