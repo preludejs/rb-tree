@@ -21,15 +21,15 @@ export const set =
 
 export const maybeGet =
   <K, V>(map: Map_<K, V>, key: K): undefined | V =>
-    RbTree.get(map.tree, key)?.[1] ?? undefined
+    RbTree.get(map.tree, key)[0]?.[1]
 
 export const get =
   <K, V>(map: Map_<K, V>, key: K): V => {
-    const _ = RbTree.get(map.tree, key)
-    if (!_) {
+    const _ = maybeGet(map, key)
+    if (_ === undefined) {
       throw new Error(`Key ${inspect(key)} not found.`)
     }
-    return _[1]
+    return _
   }
 
 export const has =
