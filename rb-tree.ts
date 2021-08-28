@@ -1,4 +1,4 @@
-import { B, E, N } from './prelude.js'
+import { R, B, E, N, M } from './prelude.js'
 import * as Cmp from '@prelude/cmp'
 import blacken from './blacken.js'
 import delete__ from './delete.js'
@@ -111,20 +111,23 @@ export const shift =
   <T, K>(tree: RbTree<T, K>): T =>
     shiftCount(tree)[0]
 
-const each_ =
-  function* <T>(n: N<T>): Generator<T> {
+const eachNode =
+  function* <T>(n: N<T>): Generator<M<T>> {
     if (!n) {
       return
     }
-    yield *each_(n.l)
-    yield n.v
-    yield *each_(n.r)
+    yield *eachNode(n.l)
+    yield n
+    yield *eachNode(n.r)
   }
 
 // TODO: eachCount
 export const each =
-  <T, K>(tree: RbTree<T, K>): Generator<T> =>
-    each_(tree.root)
+  function* <T, K>(tree: RbTree<T, K>): Generator<T> {
+    for (const _ of eachNode(tree.root)) {
+      yield _.v
+    }
+  }
 
 export const countLeft_ =
   <T, K>(_: N<T>, key: (value: T) => K, cmp: CmpWithRight<K>, inclusive: boolean): number => {
@@ -172,3 +175,62 @@ const delete_ =
   }
 
 export { delete_ as delete }
+
+/** Assert local invariant - red nodes don't have red children. */
+export const assertLocal =
+  <T, K>(tree: RbTree<T, K>): void => {
+    for (const _ of eachNode(tree.root)) {
+      if (_.c === R) {
+        if ((_.l?.c ?? B) !== B || (_.r?.c ?? B) !== B) {
+          throw new Error('Local invariant violated.')
+        }
+      }
+    }
+  }
+
+/** Assert global invariant - paths from nil leafs up to the root go through same number of black nodes. */
+export const assertGlobal =
+  <T, K>(tree: RbTree<T, K>): void => {
+
+    const visit =
+      function* <T>(n: N<T>, b: number): Generator<number> {
+        if (!n) {
+          yield b
+          return
+        }
+        const b_ = b + (n.c === B ? 1 : 0)
+        yield *visit(n.l, b_)
+        yield *visit(n.r, b_)
+      }
+
+    let b_: undefined | number = undefined
+    for (const b of visit(tree.root, 0)) {
+      if (b_ === undefined) {
+        b_ = b
+      }
+      if (b_ !== b) {
+        throw new Error('Global invariant violated.')
+      }
+    }
+  }
+
+export const assertMonotonic =
+  <T, K>(tree: RbTree<T, K>): void => {
+    let k: undefined | K = undefined
+    for (const _ of each(tree)) {
+      const k_ = tree.key(_)
+      if (k === undefined) {
+        k = k_
+      }
+      if (tree.cmp(k, k_) === Cmp.dsc) {
+        throw new Error('Monotonic invariant violated.')
+      }
+    }
+  }
+
+export const assert =
+  <T, K>(tree: RbTree<T, K>): void => {
+    assertLocal(tree)
+    assertGlobal(tree)
+    assertMonotonic(tree)
+  }

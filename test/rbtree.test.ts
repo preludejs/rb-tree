@@ -2,18 +2,20 @@ import * as RbTree from '../rb-tree.js'
 import * as Arrays from '@prelude/array'
 
 test('basic values', () => {
-  const rb = RbTree.of(RbTree.Cmp.strings, (_: string) => _)
-  RbTree.insert(rb, 'foo')
-  RbTree.insert(rb, 'bar')
-  RbTree.insert(rb, 'baz')
-  expect(RbTree.has(rb, 'foo')).toBe(true)
-  expect(RbTree.has(rb, 'bar')).toBe(true)
-  expect(RbTree.has(rb, 'baz')).toBe(true)
-  expect(RbTree.has(rb, 'bak')).toBe(false)
-  RbTree.delete(rb, 'foo')
-  expect(RbTree.has(rb, 'foo')).toBe(false)
-  expect(RbTree.has(rb, 'bar')).toBe(true)
-  expect(RbTree.has(rb, 'baz')).toBe(true)
+  const tree = RbTree.of(RbTree.Cmp.strings, (_: string) => _)
+  RbTree.insert(tree, 'foo')
+  RbTree.insert(tree, 'bar')
+  RbTree.insert(tree, 'baz')
+  RbTree.assert(tree)
+  expect(RbTree.has(tree, 'foo')).toBe(true)
+  expect(RbTree.has(tree, 'bar')).toBe(true)
+  expect(RbTree.has(tree, 'baz')).toBe(true)
+  expect(RbTree.has(tree, 'bak')).toBe(false)
+  RbTree.delete(tree, 'foo')
+  RbTree.assert(tree)
+  expect(RbTree.has(tree, 'foo')).toBe(false)
+  expect(RbTree.has(tree, 'bar')).toBe(true)
+  expect(RbTree.has(tree, 'baz')).toBe(true)
 })
 
 test('complex elements', () => {
@@ -22,6 +24,7 @@ test('complex elements', () => {
   RbTree.insert(tree, { key: 'foo', value: 'FOO' })
   expect(RbTree.has(tree, 'foo')).toBe(true)
   expect(RbTree.has(tree, 'bar')).toBe(false)
+  RbTree.assert(tree)
 })
 
 test('random numbers', () => {
@@ -45,6 +48,7 @@ describe('pop', () => {
   test(`insert ${n}`, () => {
     for (let i = 0; i < n; i++) {
       RbTree.insert(rb, Math.random())
+      RbTree.assert(rb)
       if (rb.root?.s !== i + 1) {
         throw new Error(`${rb.root?.s} != ${i + 1}`)
       }
@@ -54,6 +58,7 @@ describe('pop', () => {
   test('pop all', () => {
     while (true) {
       const [ _ ] = RbTree.maybeShiftCount(rb)
+      RbTree.assert(rb)
       if (_ === undefined) {
         break
       }
@@ -81,6 +86,7 @@ describe('deletes', () => {
       const value = Math.random()
       xs.push(value)
       RbTree.insert(rb, value)
+      RbTree.assert(rb)
     }
   })
 
@@ -90,6 +96,7 @@ describe('deletes', () => {
       const value = Arrays.deleteSwapRandom(xs)
       expect(RbTree.has(rb, value)).toBe(true)
       RbTree.delete(rb, value)
+      RbTree.assert(rb)
       expect(RbTree.has(rb, value)).toBe(false)
       expect(RbTree.count(rb)).toBe(n - (i + 1))
     }
@@ -108,6 +115,7 @@ describe('range count', () => {
     for (const x of xs) {
       RbTree.insert(rb, x)
     }
+    RbTree.assert(rb)
     expect(Array.from(RbTree.each(rb))).toEqual(Arrays.of(n, _ => _ + 1))
   })
 
