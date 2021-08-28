@@ -39,6 +39,18 @@ test('random numbers', () => {
   }
 })
 
+test('permutations', () => {
+  const n = 9
+  for (const values of Arrays.permutations(Arrays.indices(n))) {
+    const rb = RbTree.of(RbTree.Cmp.numbers, (_: number) => _)
+    for (const value of values) {
+      RbTree.insert(rb, value)
+    }
+    RbTree.assert(rb)
+    expect(RbTree.count(rb)).toBe(n)
+  }
+})
+
 describe('pop', () => {
 
   const n = 1_000
