@@ -1,6 +1,6 @@
 {
   "name": "@prelude/rb-tree",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Red-black tree module.",
   "type": "module",
   "main": "index.js",
