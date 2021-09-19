@@ -4,7 +4,7 @@ import rotate from './rotate.js'
 import shift from './shift.js'
 
 const delete_ =
-  <T, K>(_: N<T>, key: (value: T) => K, cmp1: Cmp.Cmp1<K>, i: number): [ undefined | T, number, N<T> ] => {
+  <T, K>(_: N<T>, key: (value: T) => K, cmpB: Cmp.CmpB<K>, i: number): [ undefined | T, number, N<T> ] => {
     switch (true) {
 
       // del E = E
@@ -18,7 +18,7 @@ const delete_ =
       //                 | x /= y = T R E y E
       case _?.c === R && _.l === E && _.r === E: {
         const { v: y, n: j } = _ as M<T>
-        return cmp1(key(y)) === Cmp.equal ?
+        return cmpB(key(y)) === Cmp.equal ?
           j <= i ?
             [ y, j - i, E ] :
             [ undefined, j - i, mk(R, E, y, j - i, E) ] :
@@ -29,7 +29,7 @@ const delete_ =
       //                 | x /= y = T B E y E
       case _?.c === B && _.l === E && _.r === E: {
         const { v: y, n: j } = _ as M<T>
-        return cmp1(key(y)) === Cmp.equal ?
+        return cmpB(key(y)) === Cmp.equal ?
           j <= i ?
             [ y, j - i, EE ] :
             [ undefined, j - i, mk(B, E, y, j - i, E) ] :
@@ -42,10 +42,10 @@ const delete_ =
       // | x > z = T B (T R E y E) z E
       case _?.c === B && _.l?.c === R && _.l.l === E && _.l.r === E && _.r === E: {
         const { l: { v: y, n: j }, v: z, n: k } = _ as O<T, M<T>>
-        const cmp_ = cmp1(key(z))
+        const cmp_ = cmpB(key(z))
         switch (cmp_) {
           case Cmp.asc: {
-            const [ v, n, r ] = delete_(mk(R, E, y, j, E), key, cmp1, i)
+            const [ v, n, r ] = delete_(mk(R, E, y, j, E), key, cmpB, i)
             return [ v, n, mk(B, r, _!.v, _!.n, E) ] // TODO: ?
           }
           case Cmp.equal:
@@ -65,10 +65,10 @@ const delete_ =
       // | x > y = rotate c a y (del b)
       default: {
         const { c, l: a, v: y, n: j, r: b } = _ as M<T>
-        const cmp_ = cmp1(key(y))
+        const cmp_ = cmpB(key(y))
         switch (cmp_) {
           case Cmp.asc: {
-            const [ v, n, r ] = delete_(a, key, cmp1, i)
+            const [ v, n, r ] = delete_(a, key, cmpB, i)
             return [ v, n, rotate(mk(c, r, y, j, b)) ]
           }
           case Cmp.equal: {
@@ -76,7 +76,7 @@ const delete_ =
             return [ y, j_, rotate(mk(c, a, y_!, j_, b_)) ]
           }
           case Cmp.dsc: {
-            const [ v, n, r ] = delete_(b, key, cmp1, i)
+            const [ v, n, r ] = delete_(b, key, cmpB, i)
             return [ v, n, rotate(mk(c, a, y, j, r)) ]
           }
           default:
