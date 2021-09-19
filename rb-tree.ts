@@ -21,10 +21,12 @@ export type RbTree<T, K> = {
 
 export type t<T, K> = RbTree<T, K>
 
+/** Range query. */
 export type Query<K> =
   | undefined
   | ({} | { $l: K } | { $le: K } & ({} | { $r: K } | { $re: K }))
 
+/** @returns Red-black tree based on element-to-key mapping function and comparision over keys function. */
 export const of =
   <T, K>(cmp: Cmp.t<K>, key: ((value: T) => K)): RbTree<T, K> => ({
     cmp,
