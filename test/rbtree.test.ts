@@ -1,4 +1,4 @@
-import * as RbTree from '../rb-tree.js'
+import * as RbTree from '../cjs/rb-tree.js'
 import * as Arrays from '@prelude/array'
 
 test('basic values', () => {
