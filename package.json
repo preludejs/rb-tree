@@ -41,12 +41,13 @@
       "import": "./mjs/index.js",
       "require": "./cjs/index.js"
     },
-    "./*.js": {
-      "import": "./mjs/*.js",
-      "require": "./cjs/*.js"
+    "./bag": {
+      "import": "./mjs/bag.js",
+      "require": "./cjs/bag.js"
     },
-    "./*": {
-      "require": "./cjs/*.js"
+    "./map": {
+      "import": "./mjs/map.js",
+      "require": "./cjs/map.js"
     }
   }
 }

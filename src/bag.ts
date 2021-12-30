@@ -30,6 +30,11 @@ export const remove =
   <T>(bag: Bag<T>, key: T, n = 1): -0 | number =>
     RbTree.delete(bag.tree, key, n)[1]
 
+/** @returns shifted value with count. */
+export const shift =
+  <T>(bag: Bag<T>) =>
+    RbTree.shiftCount(bag.tree)
+
 // const delete_ =
 //   <T>(bag: Bag<T>, key: T): -0 | number =>
 //     RbTree.delete(bag.tree, key)?.[1] ?? -0

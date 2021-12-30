@@ -101,7 +101,7 @@ export const maybeShiftCount =
  * @throws if tree is empty.
  */
 export const shiftCount =
-  <T, K>(tree: RbTree<T, K>): [ T, number ] => {
+  <T, K>(tree: RbTree<T, K>): [ value: T, count: number ] => {
     const [ x, i ] = maybeShiftCount(tree)
     if (x === undefined) {
       throw new Error('Error while trying to shift an empty rb-tree.')
