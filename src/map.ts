@@ -1,5 +1,5 @@
 import { inspect } from 'util'
-import * as RbTree from './rb-tree'
+import * as RbTree from './rb-tree.js'
 import Cmp = RbTree.Cmp
 
 type E<K, V> = [ K, V ]

@@ -236,3 +236,13 @@ export const assert =
     assertGlobal(tree)
     assertMonotonic(tree)
   }
+
+/** @returns number of elements. */
+export const length =
+  <T, K>(tree: RbTree<T, K>): number =>
+    tree.root?.s ?? 0
+
+/** @returns `true` if there are no elements, `false` otherwise. */
+export const empty =
+  <T, K>(tree: RbTree<T, K>): boolean =>
+    length(tree) === 0

@@ -1,4 +1,4 @@
-import * as RbTree from './rb-tree'
+import * as RbTree from './rb-tree.js'
 import Cmp = RbTree.Cmp
 
 export { Cmp }
@@ -34,6 +34,14 @@ export const remove =
 export const shift =
   <T>(bag: Bag<T>) =>
     RbTree.shiftCount(bag.tree)
+
+export const length =
+  <T>(bag: Bag<T>) =>
+    RbTree.length(bag.tree)
+
+export const empty =
+  <T>(bag: Bag<T>) =>
+    RbTree.empty(bag.tree)
 
 // const delete_ =
 //   <T>(bag: Bag<T>, key: T): -0 | number =>
