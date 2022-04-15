@@ -1,4 +1,4 @@
-import * as Map_ from '../cjs/map.js'
+import * as Map_ from './map.js'
 
 test('simple', () => {
   const map = Map_.of<string, number>(Map_.Cmp.strings)

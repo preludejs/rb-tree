@@ -1,9 +1,12 @@
-import * as RbTree from '../mjs/rb-tree.js'
-const t = RbTree.of(RbTree.Cmp.numbers, (_: number) => _)
+import insert from '../fast.cjs'
+let t: any = undefined
 const before = Date.now()
-for (let i = 0; i < 1_000_000; i++) {
-  RbTree.insert(t, Math.random())
+// const n = 100
+const n = 1_000_000
+for (let i = 0; i < n; i++) {
+  t = insert(t, Math.random())
 }
+// console.log(JSON.stringify(t, null, 2))
 const duration = Date.now() - before
 console.log((duration / 1000).toFixed(7))
 const used = process.memoryUsage();

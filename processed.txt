@@ -1,0 +1,634 @@
+Statistical profiling result from isolate-0x130008000-14455-v8.log, (2337 ticks, 8 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+     21    0.9%          /usr/lib/system/libsystem_pthread.dylib
+     12    0.5%          /usr/lib/system/libsystem_c.dylib
+     11    0.5%          /usr/lib/system/libsystem_malloc.dylib
+      7    0.3%          /usr/lib/libc++.1.dylib
+      2    0.1%          /usr/lib/system/libsystem_kernel.dylib
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+    799   34.2%   35.0%  LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+    337   14.4%   14.8%  LazyCompile: *balance file:///Users/mirek/prelude/packages/rb-tree/mjs/balance.js:2:17
+     24    1.0%    1.1%  LazyCompile: *mk file:///Users/mirek/prelude/packages/rb-tree/mjs/prelude.js:12:19
+     12    0.5%    0.5%  LazyCompile: *scan /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:11226:22
+      9    0.4%    0.4%  LazyCompile: *scanJsDocToken /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:11950:32
+      8    0.3%    0.4%  LazyCompile: *<anonymous> file:///Users/mirek/prelude/packages/rb-tree/bench/ours.ts:1:1
+      3    0.1%    0.1%  LazyCompile: *iterateCommentRanges /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:10445:34
+      3    0.1%    0.1%  LazyCompile: *<anonymous> /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:36635:74
+      3    0.1%    0.1%  Function: ^scan /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:11226:22
+      2    0.1%    0.1%  LazyCompile: *token /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:31140:23
+      2    0.1%    0.1%  LazyCompile: *isIdentifierPart /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:10587:30
+      2    0.1%    0.1%  LazyCompile: *declareSymbol /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43614:31
+      2    0.1%    0.1%  LazyCompile: *combinePaths /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:6321:26
+      2    0.1%    0.1%  Function: ^bindWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45526:28
+      1    0.0%    0.0%  RegExp: .*\/node_modules\/(?:@[^\/]+\/)?[^\/]+\/
+      1    0.0%    0.0%  RegExp: (\sno-default-lib\s*=\s*)(?:(?:'([^']*)')|(?:"([^"]*)"))
+      1    0.0%    0.0%  LazyCompile: *speculationHelper /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:12034:35
+      1    0.0%    0.0%  LazyCompile: *setParentRecursive /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:20792:32
+      1    0.0%    0.0%  LazyCompile: *parseTypeReference /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:32421:36
+      1    0.0%    0.0%  LazyCompile: *parseLiteralLikeNode /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:32390:38
+      1    0.0%    0.0%  LazyCompile: *parseKeywordAndNoDot /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:33017:38
+      1    0.0%    0.0%  LazyCompile: *parseJSDocCommentWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:36615:45
+      1    0.0%    0.0%  LazyCompile: *isLineBreak /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:10216:25
+      1    0.0%    0.0%  LazyCompile: *hasUnicodeEscape /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:10634:40
+      1    0.0%    0.0%  LazyCompile: *getEscapedTextOfIdentifierOrLiteral /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:17254:49
+      1    0.0%    0.0%  LazyCompile: *fileExtensionIs /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:6015:29
+      1    0.0%    0.0%  LazyCompile: *createSymbolTable /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:14101:31
+      1    0.0%    0.0%  LazyCompile: *createBaseNamedDeclaration /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:22095:44
+      1    0.0%    0.0%  LazyCompile: *bindParentToChild /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:20812:35
+      1    0.0%    0.0%  LazyCompile: *bindChildren /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43922:30
+      1    0.0%    0.0%  LazyCompile: *appendIfUnique /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:1233:28
+      1    0.0%    0.0%  Function: ^token /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:31140:23
+      1    0.0%    0.0%  Function: ^parseTypeWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:33373:33
+      1    0.0%    0.0%  Function: ^parseNonArrayType /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:33054:35
+      1    0.0%    0.0%  Function: ^parseJSDocIdentifierName /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:37466:50
+      1    0.0%    0.0%  Function: ^isTupleElementName /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:32961:36
+      1    0.0%    0.0%  Function: ^isStartOfType /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:33123:31
+      1    0.0%    0.0%  Function: ^insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+      1    0.0%    0.0%  Function: ^identity /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:1723:22
+      1    0.0%    0.0%  Function: ^hasTrailingDirectorySeparator /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:6032:43
+      1    0.0%    0.0%  Function: ^getSyntacticModifierFlags /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:18638:39
+      1    0.0%    0.0%  Function: ^getOrCreateSourceFileByPath /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:160541:49
+      1    0.0%    0.0%  Function: ^fileExists /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:7985:32
+      1    0.0%    0.0%  Function: ^declareSymbol /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43614:31
+      1    0.0%    0.0%  Function: ^createSymbol /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:47740:30
+      1    0.0%    0.0%  Function: ^asName /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:26434:24
+      1    0.0%    0.0%  Function: ^append /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:1174:20
+      1    0.0%    0.0%  Function: ^addDeclarationToSymbol /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43512:40
+      1    0.0%    0.0%  Function: ^_loop_4 /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:40063:36
+
+ [C++]:
+   ticks  total  nonlib   name
+    640   27.4%   28.0%  t std::__1::vector<node::BaseObjectPtrImpl<node::BaseObject, false>, std::__1::allocator<node::BaseObjectPtrImpl<node::BaseObject, false> > >::vector(unsigned long)
+    134    5.7%    5.9%  t _Builtins_StrictEqual_WithFeedback
+     32    1.4%    1.4%  T _task_restartable_ranges_synchronize
+     31    1.3%    1.4%  T _voucher_mach_msg_adopt
+     30    1.3%    1.3%  t _Builtins_LoadIC
+     15    0.6%    0.7%  t _Builtins_StrictEqual_Baseline
+     14    0.6%    0.6%  T _kdebug_trace
+      9    0.4%    0.4%  t _Builtins_CallFunction_ReceiverIsNullOrUndefined
+      8    0.3%    0.4%  t _Builtins_StoreIC
+      6    0.3%    0.3%  t _Builtins_LoadIC_Megamorphic
+      6    0.3%    0.3%  T _semaphore_wait_signal_trap
+      5    0.2%    0.2%  t __os_once_gate_wait
+      5    0.2%    0.2%  t _Builtins_StringEqual
+      5    0.2%    0.2%  t _Builtins_BaselineLeaveFrame
+      4    0.2%    0.2%  t ___pfz_setup
+      4    0.2%    0.2%  t _Builtins_ToBooleanForBaselineJump
+      4    0.2%    0.2%  t _Builtins_StringSubstring
+      4    0.2%    0.2%  T _host_request_notification
+      4    0.2%    0.2%  T __kernelrpc_mach_port_get_refs
+      3    0.1%    0.1%  t std::__1::ostreambuf_iterator<char, std::__1::char_traits<char> > std::__1::__pad_and_output<char, std::__1::char_traits<char> >(std::__1::ostreambuf_iterator<char, std::__1::char_traits<char> >, char const*, char const*, char const*, std::__1::ios_base&, char)
+      3    0.1%    0.1%  t _Builtins_LoadIC_NoFeedback
+      3    0.1%    0.1%  t _Builtins_Call_ReceiverIsNullOrUndefined_Baseline_Compact
+      3    0.1%    0.1%  t _Builtins_BitwiseAnd_Baseline
+      3    0.1%    0.1%  t _Builtins_ArrayPrototypePush
+      3    0.1%    0.1%  t _Builtins_ArrayPrototypeJoin
+      3    0.1%    0.1%  T node::loader::ModuleWrap::New(v8::FunctionCallbackInfo<v8::Value> const&)
+      2    0.1%    0.1%  t __os_nospin_lock_unlock_slow
+      2    0.1%    0.1%  t __os_nospin_lock_lock_slow
+      2    0.1%    0.1%  t _Builtins_StringPrototypeCharCodeAt
+      2    0.1%    0.1%  t _Builtins_StringIndexOf
+      2    0.1%    0.1%  t _Builtins_StringCodePointAt
+      2    0.1%    0.1%  t _Builtins_RecordWriteEmitRememberedSetSaveFP
+      2    0.1%    0.1%  t _Builtins_MathRandom
+      2    0.1%    0.1%  t _Builtins_LoadICBaseline
+      2    0.1%    0.1%  t _Builtins_InterpreterEntryTrampoline
+      2    0.1%    0.1%  t _Builtins_Call_ReceiverIsNullOrUndefined
+      2    0.1%    0.1%  t _Builtins_CallFunction_ReceiverIsNotNullOrUndefined
+      2    0.1%    0.1%  t _Builtins_BaselineOutOfLinePrologue
+      2    0.1%    0.1%  T _semaphore_create
+      2    0.1%    0.1%  T _mach_vm_allocate
+      2    0.1%    0.1%  T _fcntl$NOCANCEL
+      1    0.0%    0.0%  t std::__1::__tree<int, std::__1::less<int>, std::__1::allocator<int> >::__insert_node_at(std::__1::__tree_end_node<std::__1::__tree_node_base<void*>*>*, std::__1::__tree_node_base<void*>*&, std::__1::__tree_node_base<void*>*)
+      1    0.0%    0.0%  t defaultContains(BinaryProperty const&, int, UProperty)
+      1    0.0%    0.0%  t __enlarge
+      1    0.0%    0.0%  t _Builtins_StringPrototypeSlice
+      1    0.0%    0.0%  t _Builtins_MapPrototypeSet
+      1    0.0%    0.0%  t _Builtins_LessThan_Baseline
+      1    0.0%    0.0%  t _Builtins_LessThanOrEqual_Baseline
+      1    0.0%    0.0%  t _Builtins_LdaUndefinedHandler
+      1    0.0%    0.0%  t _Builtins_LdaImmutableCurrentContextSlotHandler
+      1    0.0%    0.0%  t _Builtins_JumpLoopHandler
+      1    0.0%    0.0%  t _Builtins_JumpIfToBooleanFalseHandler
+      1    0.0%    0.0%  t _Builtins_Increment_Baseline
+      1    0.0%    0.0%  t _Builtins_GreaterThanOrEqual_Baseline
+      1    0.0%    0.0%  t _Builtins_FindOrderedHashMapEntry
+      1    0.0%    0.0%  t _Builtins_CompileLazy
+      1    0.0%    0.0%  t _Builtins_Call_ReceiverIsNotNullOrUndefined
+      1    0.0%    0.0%  t _Builtins_CallUndefinedReceiverHandler
+      1    0.0%    0.0%  t _Builtins_CEntry_Return1_DontSaveFPRegs_ArgvOnStack_NoBuiltinExit
+      1    0.0%    0.0%  t _Builtins_BitwiseOr_Baseline
+      1    0.0%    0.0%  T _u_isupper_70
+      1    0.0%    0.0%  T __platform_strcmp
+      1    0.0%    0.0%  T ___pthread_init
+
+ [Summary]:
+   ticks  total  nonlib   name
+   1243   53.2%   54.4%  JavaScript
+   1033   44.2%   45.2%  C++
+    299   12.8%   13.1%  GC
+     53    2.3%          Shared libraries
+      8    0.3%          Unaccounted
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+    400   54.0%   17.1%  t std::__1::vector<node::BaseObjectPtrImpl<node::BaseObject, false>, std::__1::allocator<node::BaseObjectPtrImpl<node::BaseObject, false> > >::vector(unsigned long)
+    134   18.1%    5.7%  t _Builtins_StrictEqual_WithFeedback
+     30    4.0%    1.3%  t _Builtins_LoadIC
+     19    2.6%    0.8%  T _voucher_mach_msg_adopt
+     15    2.0%    0.6%  t _Builtins_StrictEqual_Baseline
+     14    1.9%    0.6%  T _kdebug_trace
+     10    1.3%    0.4%  t _Builtins_ArrayPrototypeJoin
+      9    1.2%    0.4%  t _Builtins_CallFunction_ReceiverIsNullOrUndefined
+      8    1.1%    0.3%  t _Builtins_StoreIC
+      6    0.8%    0.3%  t _Builtins_LoadIC_Megamorphic
+      5    0.7%    0.2%  t _Builtins_BaselineLeaveFrame
+      4    0.5%    0.2%  t _Builtins_ToBooleanForBaselineJump
+      4    0.5%    0.2%  t _Builtins_StringSubstring
+      4    0.5%    0.2%  t _Builtins_MathRandom
+      4    0.5%    0.2%  t _Builtins_ArrayPrototypePush
+      3    0.4%    0.1%  t std::__1::ostreambuf_iterator<char, std::__1::char_traits<char> > std::__1::__pad_and_output<char, std::__1::char_traits<char> >(std::__1::ostreambuf_iterator<char, std::__1::char_traits<char> >, char const*, char const*, char const*, std::__1::ios_base&, char)
+      3    0.4%    0.1%  t ___pfz_setup
+      3    0.4%    0.1%  t _Builtins_LoadIC_NoFeedback
+      3    0.4%    0.1%  t _Builtins_Call_ReceiverIsNullOrUndefined_Baseline_Compact
+      3    0.4%    0.1%  t _Builtins_BitwiseAnd_Baseline
+      3    0.4%    0.1%  T node::loader::ModuleWrap::New(v8::FunctionCallbackInfo<v8::Value> const&)
+      3    0.4%    0.1%  T __kernelrpc_mach_port_get_refs
+      2    0.3%    0.1%  t _Builtins_StringPrototypeCharCodeAt
+      2    0.3%    0.1%  t _Builtins_StringEqual
+      2    0.3%    0.1%  t _Builtins_StringCodePointAt
+      2    0.3%    0.1%  t _Builtins_RecordWriteEmitRememberedSetSaveFP
+      2    0.3%    0.1%  t _Builtins_MapPrototypeHas
+      2    0.3%    0.1%  t _Builtins_MapPrototypeGet
+      2    0.3%    0.1%  t _Builtins_LoadICBaseline
+      2    0.3%    0.1%  t _Builtins_InterpreterEntryTrampoline
+      2    0.3%    0.1%  t _Builtins_FindOrderedHashMapEntry
+      2    0.3%    0.1%  t _Builtins_Call_ReceiverIsNullOrUndefined
+      2    0.3%    0.1%  t _Builtins_CallFunction_ReceiverIsNotNullOrUndefined
+      2    0.3%    0.1%  t _Builtins_BaselineOutOfLinePrologue
+      2    0.3%    0.1%  t _Builtins_ArrayMap
+      1    0.1%    0.0%  t std::__1::__tree<int, std::__1::less<int>, std::__1::allocator<int> >::__insert_node_at(std::__1::__tree_end_node<std::__1::__tree_node_base<void*>*>*, std::__1::__tree_node_base<void*>*&, std::__1::__tree_node_base<void*>*)
+      1    0.1%    0.0%  t defaultContains(BinaryProperty const&, int, UProperty)
+      1    0.1%    0.0%  t _v8_Default_embedded_blob_code_data_
+      1    0.1%    0.0%  t __os_nospin_lock_lock_slow
+      1    0.1%    0.0%  t __enlarge
+      1    0.1%    0.0%  t _Builtins_StringPrototypeSlice
+      1    0.1%    0.0%  t _Builtins_StringPrototypeIndexOf
+      1    0.1%    0.0%  t _Builtins_StringIndexOf
+      1    0.1%    0.0%  t _Builtins_RegExpPrototypeTest
+      1    0.1%    0.0%  t _Builtins_MapPrototypeSet
+      1    0.1%    0.0%  t _Builtins_LessThan_Baseline
+      1    0.1%    0.0%  t _Builtins_LessThanOrEqual_Baseline
+      1    0.1%    0.0%  t _Builtins_LdaUndefinedHandler
+      1    0.1%    0.0%  t _Builtins_LdaImmutableCurrentContextSlotHandler
+      1    0.1%    0.0%  t _Builtins_JumpLoopHandler
+      1    0.1%    0.0%  t _Builtins_JumpIfToBooleanFalseHandler
+      1    0.1%    0.0%  t _Builtins_Increment_Baseline
+      1    0.1%    0.0%  t _Builtins_GreaterThanOrEqual_Baseline
+      1    0.1%    0.0%  t _Builtins_CompileLazy
+      1    0.1%    0.0%  t _Builtins_CloneFastJSArray
+      1    0.1%    0.0%  t _Builtins_Call_ReceiverIsNotNullOrUndefined
+      1    0.1%    0.0%  t _Builtins_CallUndefinedReceiverHandler
+      1    0.1%    0.0%  t _Builtins_CEntry_Return1_DontSaveFPRegs_ArgvOnStack_NoBuiltinExit
+      1    0.1%    0.0%  t _Builtins_BitwiseOr_Baseline
+      1    0.1%    0.0%  t _Builtins_ArrayPrototypeSort
+      1    0.1%    0.0%  T _u_isupper_70
+      1    0.1%    0.0%  T _fcntl$NOCANCEL
+      1    0.1%    0.0%  T __platform_strcmp
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+    799   34.2%  LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+    783   98.0%    LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+    770   98.3%      LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+    759   98.6%        LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+    749   98.7%          LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+    735   98.1%            LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+     14    1.9%            LazyCompile: *<anonymous> file:///Users/mirek/prelude/packages/rb-tree/bench/ours.ts:1:1
+     10    1.3%          LazyCompile: *<anonymous> file:///Users/mirek/prelude/packages/rb-tree/bench/ours.ts:1:1
+     10  100.0%            t _Builtins_GeneratorPrototypeNext
+     11    1.4%        LazyCompile: *<anonymous> file:///Users/mirek/prelude/packages/rb-tree/bench/ours.ts:1:1
+     11  100.0%          t _Builtins_GeneratorPrototypeNext
+     11  100.0%            t std::__1::vector<node::BaseObjectPtrImpl<node::BaseObject, false>, std::__1::allocator<node::BaseObjectPtrImpl<node::BaseObject, false> > >::vector(unsigned long)
+     13    1.7%      LazyCompile: *<anonymous> file:///Users/mirek/prelude/packages/rb-tree/bench/ours.ts:1:1
+     13  100.0%        t _Builtins_GeneratorPrototypeNext
+     13  100.0%          t std::__1::vector<node::BaseObjectPtrImpl<node::BaseObject, false>, std::__1::allocator<node::BaseObjectPtrImpl<node::BaseObject, false> > >::vector(unsigned long)
+     13  100.0%            LazyCompile: ~run node:internal/modules/esm/module_job:193:12
+     16    2.0%    LazyCompile: *<anonymous> file:///Users/mirek/prelude/packages/rb-tree/bench/ours.ts:1:1
+     16  100.0%      t _Builtins_GeneratorPrototypeNext
+     16  100.0%        t std::__1::vector<node::BaseObjectPtrImpl<node::BaseObject, false>, std::__1::allocator<node::BaseObjectPtrImpl<node::BaseObject, false> > >::vector(unsigned long)
+     16  100.0%          LazyCompile: ~run node:internal/modules/esm/module_job:193:12
+     16  100.0%            t _Builtins_AsyncFunctionAwaitResolveClosure
+
+    640   27.4%  t std::__1::vector<node::BaseObjectPtrImpl<node::BaseObject, false>, std::__1::allocator<node::BaseObjectPtrImpl<node::BaseObject, false> > >::vector(unsigned long)
+    198   30.9%    LazyCompile: ~Script node:vm:66:14
+    198  100.0%      LazyCompile: ~_moduleCompile /Users/mirek/prelude/node_modules/v8-compile-cache-lib/v8-compile-cache.js:207:17
+    198  100.0%        LazyCompile: ~_ownModuleCompile /Users/mirek/prelude/node_modules/v8-compile-cache-lib/v8-compile-cache.js:157:31
+    198  100.0%          LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1108:37
+    198  100.0%            Function: ^Module.load node:internal/modules/cjs/loader:963:33
+     34    5.3%    Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+     28   82.4%      Function: ^nativeModuleRequire node:internal/bootstrap/loaders:332:29
+     12   42.9%        Function: ~<anonymous> node:repl:1:1
+     12  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+     12  100.0%            LazyCompile: ~compileForPublicLoader node:internal/bootstrap/loaders:246:25
+      5   17.9%        Function: ~<anonymous> node:crypto:1:1
+      5  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      5  100.0%            Function: ^compileForPublicLoader node:internal/bootstrap/loaders:246:25
+      2    7.1%        Function: ~<anonymous> node:internal/readline/emitKeypressEvents:1:1
+      2  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      2  100.0%            Function: ^nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      1    3.6%        LazyCompile: ~lazyWebCrypto node:crypto:127:23
+      1  100.0%          LazyCompile: ~get node:crypto:296:8
+      1  100.0%            t _Builtins_ReflectGet
+      1    3.6%        LazyCompile: ~lazyLoadStreams node:fs:2858:25
+      1  100.0%          LazyCompile: ~get ReadStream node:fs:3001:17
+      1  100.0%            t _Builtins_ReflectGet
+      1    3.6%        Function: ~<anonymous> node:worker_threads:1:1
+      1  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1  100.0%            Function: ^compileForPublicLoader node:internal/bootstrap/loaders:246:25
+      1    3.6%        Function: ~<anonymous> node:tty:1:1
+      1  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1  100.0%            Function: ^nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      1    3.6%        Function: ~<anonymous> node:module:1:1
+      1  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1  100.0%            LazyCompile: ~compileForPublicLoader node:internal/bootstrap/loaders:246:25
+      1    3.6%        Function: ~<anonymous> node:internal/readline/callbacks:1:1
+      1  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1  100.0%            Function: ^nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      1    3.6%        Function: ~<anonymous> node:internal/crypto/pbkdf2:1:1
+      1  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1  100.0%            Function: ^nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      1    3.6%        Function: ~<anonymous> node:internal/crypto/hkdf:1:1
+      1  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1  100.0%            Function: ^nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      1    3.6%        Function: ~<anonymous> node:assert:1:1
+      1  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1  100.0%            Function: ^compileForPublicLoader node:internal/bootstrap/loaders:246:25
+      4   11.8%      LazyCompile: ~compileForPublicLoader node:internal/bootstrap/loaders:246:25
+      4  100.0%        Function: ^loadNativeModule node:internal/modules/cjs/helpers:44:26
+      4  100.0%          LazyCompile: ~Module._load node:internal/modules/cjs/loader:757:24
+      4  100.0%            Function: ^Module.require node:internal/modules/cjs/loader:991:36
+      2    5.9%      Function: ^compileForPublicLoader node:internal/bootstrap/loaders:246:25
+      2  100.0%        Function: ^loadNativeModule node:internal/modules/cjs/helpers:44:26
+      2  100.0%          Function: ^Module._load node:internal/modules/cjs/loader:757:24
+      2  100.0%            Function: ^Module.require node:internal/modules/cjs/loader:991:36
+     26    4.1%    LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+     26  100.0%      LazyCompile: ~nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      3   11.5%        LazyCompile: ~initializeCJSLoader node:internal/bootstrap/pre_execution:501:29
+      3  100.0%          LazyCompile: ~prepareMainThreadExecution node:internal/bootstrap/pre_execution:26:36
+      3  100.0%            Function: ~<anonymous> node:internal/main/run_main_module:1:1
+      3   11.5%        Function: ~<anonymous> node:internal/webstreams/adapters:1:1
+      3  100.0%          LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      3  100.0%            LazyCompile: ~nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      2    7.7%        Function: ~<anonymous> node:internal/webstreams/readablestream:1:1
+      2  100.0%          LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      2  100.0%            LazyCompile: ~nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      2    7.7%        Function: ~<anonymous> node:internal/process/esm_loader:1:1
+      2  100.0%          LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      2  100.0%            LazyCompile: ~nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      2    7.7%        Function: ~<anonymous> node:internal/modules/esm/loader:1:1
+      2  100.0%          LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      2  100.0%            LazyCompile: ~nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      2    7.7%        Function: ~<anonymous> node:internal/modules/esm/get_source:1:1
+      2  100.0%          LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      2  100.0%            LazyCompile: ~nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      2    7.7%        Function: ~<anonymous> node:internal/modules/esm/fetch_module:1:1
+      2  100.0%          LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      2  100.0%            LazyCompile: ~nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      2    7.7%        Function: ~<anonymous> node:internal/fs/promises:1:1
+      2  100.0%          LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      2  100.0%            LazyCompile: ~nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      1    3.8%        LazyCompile: ~initializeSourceMapsHandlers node:internal/bootstrap/pre_execution:540:38
+      1  100.0%          LazyCompile: ~prepareMainThreadExecution node:internal/bootstrap/pre_execution:26:36
+      1  100.0%            Function: ~<anonymous> node:internal/main/run_main_module:1:1
+      1    3.8%        Function: ~<anonymous> node:net:1:1
+      1  100.0%          LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1  100.0%            LazyCompile: ~nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      1    3.8%        Function: ~<anonymous> node:internal/source_map/source_map_cache:1:1
+      1  100.0%          LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1  100.0%            LazyCompile: ~nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      1    3.8%        Function: ~<anonymous> node:internal/modules/esm/resolve:1:1
+      1  100.0%          LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1  100.0%            LazyCompile: ~nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      1    3.8%        Function: ~<anonymous> node:internal/modules/esm/module_map:1:1
+      1  100.0%          LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1  100.0%            LazyCompile: ~nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      1    3.8%        Function: ~<anonymous> node:internal/main/run_main_module:1:1
+      1    3.8%        Function: ~<anonymous> node:internal/bootstrap/pre_execution:1:1
+      1  100.0%          LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1  100.0%            LazyCompile: ~nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      1    3.8%        Function: ~<anonymous> node:internal/blocklist:1:1
+      1  100.0%          LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1  100.0%            LazyCompile: ~nativeModuleRequire node:internal/bootstrap/loaders:332:29
+     11    1.7%    Function: ^slice node:buffer:594:12
+     11  100.0%      Function: ^toString node:buffer:783:46
+     11  100.0%        Function: ^readFileSync node:fs:450:22
+     11  100.0%          LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1108:37
+     11  100.0%            Function: ^Module.load node:internal/modules/cjs/loader:963:33
+      9    1.4%    LazyCompile: ~update node:internal/crypto/hash:95:40
+      9  100.0%      LazyCompile: ~_moduleCompile /Users/mirek/prelude/node_modules/v8-compile-cache-lib/v8-compile-cache.js:207:17
+      9  100.0%        LazyCompile: ~_ownModuleCompile /Users/mirek/prelude/node_modules/v8-compile-cache-lib/v8-compile-cache.js:157:31
+      9  100.0%          LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1108:37
+      9  100.0%            Function: ^Module.load node:internal/modules/cjs/loader:963:33
+
+    337   14.4%  LazyCompile: *balance file:///Users/mirek/prelude/packages/rb-tree/mjs/balance.js:2:17
+    337  100.0%    LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+    320   95.0%      LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+    312   97.5%        LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+    306   98.1%          LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+    294   96.1%            LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+     12    3.9%            LazyCompile: *<anonymous> file:///Users/mirek/prelude/packages/rb-tree/bench/ours.ts:1:1
+      5    1.6%          LazyCompile: *<anonymous> file:///Users/mirek/prelude/packages/rb-tree/bench/ours.ts:1:1
+      5  100.0%            t _Builtins_GeneratorPrototypeNext
+      8    2.5%        LazyCompile: *<anonymous> file:///Users/mirek/prelude/packages/rb-tree/bench/ours.ts:1:1
+      8  100.0%          t _Builtins_GeneratorPrototypeNext
+      8  100.0%            t std::__1::vector<node::BaseObjectPtrImpl<node::BaseObject, false>, std::__1::allocator<node::BaseObjectPtrImpl<node::BaseObject, false> > >::vector(unsigned long)
+     17    5.0%      LazyCompile: *<anonymous> file:///Users/mirek/prelude/packages/rb-tree/bench/ours.ts:1:1
+     17  100.0%        t _Builtins_GeneratorPrototypeNext
+     17  100.0%          t std::__1::vector<node::BaseObjectPtrImpl<node::BaseObject, false>, std::__1::allocator<node::BaseObjectPtrImpl<node::BaseObject, false> > >::vector(unsigned long)
+     17  100.0%            LazyCompile: ~run node:internal/modules/esm/module_job:193:12
+
+    134    5.7%  t _Builtins_StrictEqual_WithFeedback
+    134  100.0%    LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+    125   93.3%      LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+    125  100.0%        LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+    120   96.0%          LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+    113   94.2%            LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+      7    5.8%            LazyCompile: *<anonymous> file:///Users/mirek/prelude/packages/rb-tree/bench/ours.ts:1:1
+      5    4.0%          LazyCompile: *<anonymous> file:///Users/mirek/prelude/packages/rb-tree/bench/ours.ts:1:1
+      5  100.0%            t _Builtins_GeneratorPrototypeNext
+      9    6.7%      LazyCompile: *<anonymous> file:///Users/mirek/prelude/packages/rb-tree/bench/ours.ts:1:1
+      9  100.0%        t _Builtins_GeneratorPrototypeNext
+      9  100.0%          t std::__1::vector<node::BaseObjectPtrImpl<node::BaseObject, false>, std::__1::allocator<node::BaseObjectPtrImpl<node::BaseObject, false> > >::vector(unsigned long)
+      9  100.0%            LazyCompile: ~run node:internal/modules/esm/module_job:193:12
+
+     32    1.4%  T _task_restartable_ranges_synchronize
+
+     31    1.3%  T _voucher_mach_msg_adopt
+      1    3.2%    t _Builtins_RegExpPrototypeTest
+      1  100.0%      LazyCompile: ~getColorDepth node:internal/tty:106:23
+      1  100.0%        LazyCompile: ~value node:internal/console/constructor:300:20
+      1  100.0%          LazyCompile: ~value node:internal/console/constructor:321:20
+      1  100.0%            LazyCompile: ~log node:internal/console/constructor:359:6
+      1    3.2%    LazyCompile: ~validateValue /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:40193:35
+      1  100.0%      LazyCompile: ~convertPropertyValueToJson /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:40128:44
+      1  100.0%        Function: ^_loop_4 /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:40063:36
+      1  100.0%          Function: ^convertObjectLiteralExpressionToJson /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:40061:54
+      1  100.0%            LazyCompile: ~convertPropertyValueToJson /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:40128:44
+      1    3.2%    LazyCompile: ~tryResolve /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:42378:28
+      1  100.0%      LazyCompile: ~<anonymous> /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:42376:54
+      1  100.0%        LazyCompile: ~forEach /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:388:21
+      1  100.0%          LazyCompile: ~nodeModuleNameResolverWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:42361:42
+      1  100.0%            LazyCompile: ~nodeModuleNameResolver /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:42357:36
+      1    3.2%    LazyCompile: ~tryExtensions node:internal/modules/cjs/loader:400:23
+      1  100.0%      LazyCompile: ~Module._findPath node:internal/modules/cjs/loader:494:28
+      1  100.0%        LazyCompile: ~Module._resolveFilename node:internal/modules/cjs/loader:848:35
+      1  100.0%          LazyCompile: ~Module._load node:internal/modules/cjs/loader:757:24
+      1  100.0%            LazyCompile: ~Module.require node:internal/modules/cjs/loader:991:36
+      1    3.2%    LazyCompile: ~pathForLibFile /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:115591:32
+      1  100.0%      LazyCompile: ~<anonymous> /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:115610:62
+      1  100.0%        Function: ^forEach /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:388:21
+      1  100.0%          Function: ^processLibReferenceDirectives /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:115609:47
+      1  100.0%            Function: ^findSourceFileWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:115282:38
+      1    3.2%    LazyCompile: ~patchProcessObject node:internal/bootstrap/pre_execution:87:28
+      1  100.0%      LazyCompile: ~prepareMainThreadExecution node:internal/bootstrap/pre_execution:26:36
+      1  100.0%        Function: ~<anonymous> node:internal/main/run_main_module:1:1
+      1    3.2%    LazyCompile: ~parseParenthesizedArrowFunctionExpression /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:33791:59
+      1  100.0%      Function: ^tryParseParenthesizedArrowFunctionExpression /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:33607:62
+      1  100.0%        Function: ^parseAssignmentExpressionOrHigher /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:33486:51
+      1  100.0%          LazyCompile: ~parseArgumentOrArrayLiteralElement /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:34811:52
+      1  100.0%            Function: ^doOutsideOfContext /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:31029:36
+      1    3.2%    LazyCompile: ~parseObjectLiteralExpression /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:34878:46
+      1  100.0%      LazyCompile: ~parseJsonText /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:30699:31
+      1  100.0%        LazyCompile: ~parseJsonText /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:30499:27
+      1  100.0%          LazyCompile: ~parseConfigFileTextToJson /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:39880:39
+      1  100.0%            LazyCompile: ~readConfigFile /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:39870:28
+      1    3.2%    LazyCompile: ~mkdirpSync /Users/mirek/prelude/node_modules/v8-compile-cache-lib/v8-compile-cache.js:279:20
+      1  100.0%      LazyCompile: ~save /Users/mirek/prelude/node_modules/v8-compile-cache-lib/v8-compile-cache.js:73:7
+      1  100.0%        LazyCompile: ~uninstall /Users/mirek/prelude/node_modules/v8-compile-cache-lib/v8-compile-cache.js:363:23
+      1  100.0%          LazyCompile: ~attemptRequireWithV8CompileCache /Users/mirek/prelude/node_modules/ts-node/dist/util.js:93:42
+      1  100.0%            LazyCompile: ~loadCompiler /Users/mirek/prelude/node_modules/ts-node/dist/configuration.js:233:22
+      1    3.2%    LazyCompile: ~getUnionTypeFromSortedList /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:59793:44
+      1  100.0%      LazyCompile: ~getUnionType /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:59686:30
+      1  100.0%        LazyCompile: ~createTypeChecker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:46925:31
+      1  100.0%          LazyCompile: ~getTypeChecker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:114597:32
+      1  100.0%            LazyCompile: ~synchronizeHostData /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:160383:37
+      1    3.2%    LazyCompile: ~getTypeAtFlowLoopLabel /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:68838:44
+      1  100.0%      LazyCompile: ~getTypeAtFlowNode /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:68522:39
+      1  100.0%        LazyCompile: ~getFlowTypeOfReference /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:68490:40
+      1  100.0%          LazyCompile: ~checkIdentifier /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:69699:33
+      1  100.0%            LazyCompile: ~checkExpressionWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:77822:39
+      1    3.2%    LazyCompile: ~getDeclarationName /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43532:36
+      1  100.0%      LazyCompile: ~declareSymbol /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43614:31
+      1  100.0%        LazyCompile: ~declareSourceFileMember /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45041:41
+      1  100.0%          LazyCompile: ~declareSymbolAndAddToSymbolTable /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:44981:50
+      1  100.0%            LazyCompile: ~bindFunctionDeclaration /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:46306:41
+      1    3.2%    LazyCompile: ~gatherPossibleChildren /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:30463:36
+      1  100.0%      LazyCompile: ~forEachChildRecursively /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:30421:37
+      1  100.0%        LazyCompile: ~setParentRecursive /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:20792:32
+      1  100.0%          LazyCompile: ~collectModuleReferences /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:115088:45
+      1  100.0%            LazyCompile: ~collectExternalModuleReferences /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:115053:49
+      1    3.2%    LazyCompile: ~encodePathChars node:internal/url:1503:25
+      1  100.0%      LazyCompile: ~pathToFileURL node:internal/url:1518:23
+      1  100.0%        LazyCompile: ~packageResolve /Users/mirek/prelude/node_modules/ts-node/dist-raw/node-esm-resolve-implementation.js:728:24
+      1  100.0%          LazyCompile: ~moduleResolve /Users/mirek/prelude/node_modules/ts-node/dist-raw/node-esm-resolve-implementation.js:803:23
+      1  100.0%            LazyCompile: ~defaultResolve /Users/mirek/prelude/node_modules/ts-node/dist-raw/node-esm-resolve-implementation.js:866:24
+      1    3.2%    LazyCompile: ~emitTokenWithComment /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:109984:38
+      1  100.0%      LazyCompile: ~emitImportDeclaration /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:110299:39
+      1  100.0%        LazyCompile: ~pipelineEmitWithHintWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:108473:44
+      1  100.0%          LazyCompile: ~pipelineEmitWithHint /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:108458:38
+      1  100.0%            LazyCompile: ~pipelineEmitWithSourceMaps /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:112340:44
+      1    3.2%    LazyCompile: ~createNodeFactory /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:21541:31
+      1  100.0%      Function: ~<anonymous> /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:21520:11
+      1  100.0%        Function: ~<anonymous> /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:1:11
+      1  100.0%          LazyCompile: ~_ownModuleCompile /Users/mirek/prelude/node_modules/v8-compile-cache-lib/v8-compile-cache.js:157:31
+      1  100.0%            LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1108:37
+      1    3.2%    LazyCompile: ~createBaseSourceFileNode /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:26639:44
+      1  100.0%      LazyCompile: ~cloneSourceFileWithChanges /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:25637:44
+      1  100.0%        LazyCompile: ~updateSourceFile /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:25659:34
+      1  100.0%          LazyCompile: ~visitSourceFile /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:89690:33
+      1  100.0%            LazyCompile: ~saveStateAndInvoke /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:89320:36
+      1    3.2%    LazyCompile: ~Socket node:net:285:16
+      1  100.0%      LazyCompile: ~WriteStream node:tty:84:21
+      1  100.0%        LazyCompile: ~createWritableStdioStream node:internal/bootstrap/switches/is_main_thread:41:35
+      1  100.0%          LazyCompile: ~getStderr node:internal/bootstrap/switches/is_main_thread:137:19
+      1  100.0%            LazyCompile: ~get node:internal/console/constructor:212:14
+      1    3.2%    LazyCompile: ~<anonymous> /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:115520:55
+      1  100.0%      Function: ^forEach /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:388:21
+      1  100.0%        Function: ^processReferencedFiles /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:115519:40
+      1  100.0%          Function: ^findSourceFileWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:115282:38
+      1  100.0%            Function: ^findSourceFile /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:115272:32
+
+     30    1.3%  t _Builtins_LoadIC
+      2    6.7%    LazyCompile: *nextToken /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:31150:27
+      2  100.0%      Function: ^tryParseSemicolon /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:31450:35
+      1   50.0%        Function: ^parseSemicolonAfterPropertyName /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:31357:49
+      1  100.0%          Function: ^parsePropertyDeclaration /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:35734:42
+      1  100.0%            Function: ^parsePropertyOrMethodDeclaration /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:35742:50
+      1   50.0%        Function: ^parseSemicolon /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:31460:32
+      1  100.0%          Function: ^parseFunctionBlockOrSemicolon /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:35548:47
+      1  100.0%            Function: ^parseFunctionDeclaration /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:35677:42
+      2    6.7%    Function: ^declareSymbol /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43614:31
+      1   50.0%      LazyCompile: ~declareClassMember /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45036:36
+      1  100.0%        LazyCompile: *declareSymbolAndAddToSymbolTable /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:44981:50
+      1  100.0%          Function: ^bindPropertyOrMethodOrAccessor /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:46334:48
+      1  100.0%            Function: ^bindWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45526:28
+      1   50.0%      LazyCompile: *declareSymbolAndAddToSymbolTable /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:44981:50
+      1  100.0%        Function: ^bindPropertyOrMethodOrAccessor /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:46334:48
+      1  100.0%          Function: ^bindPropertyWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45762:36
+      1  100.0%            LazyCompile: *bindWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45526:28
+      2    6.7%    Function: ^bindWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45526:28
+      1   50.0%      LazyCompile: *bind /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45436:22
+      1  100.0%        Function: ^<anonymous> /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43910:38
+      1  100.0%          LazyCompile: *bindEach /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43912:26
+      1  100.0%            Function: ^bindEachFunctionsFirst /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43908:40
+      1   50.0%      Function: ^bind /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45436:22
+      1  100.0%        LazyCompile: *bindEach /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43912:26
+      1  100.0%          LazyCompile: *visitNodes /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:29873:24
+      1  100.0%            LazyCompile: *forEachChild /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:29907:26
+      1    3.3%    LazyCompile: *setParentRecursive /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:20792:32
+      1  100.0%      Function: ^getModuleInstanceState /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43251:36
+      1  100.0%        Function: ^declareModuleSymbol /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45095:37
+      1  100.0%          Function: ^bindModuleDeclaration /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45060:39
+      1  100.0%            LazyCompile: *bindWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45526:28
+      1    3.3%    LazyCompile: *parseTag /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:36796:34
+      1  100.0%      LazyCompile: *<anonymous> /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:36635:74
+      1  100.0%        LazyCompile: *parseJSDocCommentWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:36615:45
+      1  100.0%          Function: ^<anonymous> /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:36588:79
+      1  100.0%            LazyCompile: *doInsideOfContext /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:31048:35
+      1    3.3%    LazyCompile: *parseList /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:31880:27
+      1  100.0%      Function: ^parseObjectTypeMembers /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:32889:40
+      1  100.0%        Function: ^parseInterfaceDeclaration /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:36050:43
+      1  100.0%          Function: ^parseDeclarationWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:35498:40
+      1  100.0%            LazyCompile: *parseDeclaration /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:35461:34
+      1    3.3%    LazyCompile: *declareSymbol /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43614:31
+      1  100.0%      LazyCompile: *declareSymbolAndAddToSymbolTable /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:44981:50
+      1  100.0%        Function: ^bindPropertyOrMethodOrAccessor /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:46334:48
+      1  100.0%          Function: ^bindPropertyWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45762:36
+      1  100.0%            Function: ^bindWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45526:28
+      1    3.3%    LazyCompile: *bindChildren /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43922:30
+      1  100.0%      LazyCompile: *bind /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45436:22
+      1  100.0%        LazyCompile: *visitNode /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:29870:23
+      1  100.0%          Function: ^forEachChild /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:29907:26
+      1  100.0%            LazyCompile: *bindChildren /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43922:30
+      1    3.3%    Function: ^tryParseSemicolon /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:31450:35
+      1  100.0%      Function: ^parseSemicolon /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:31460:32
+      1  100.0%        Function: ^parseTypeMemberSemicolon /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:32705:42
+      1  100.0%          Function: ^parsePropertyOrMethodSignature /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:32789:48
+      1  100.0%            Function: ^parseTypeMember /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:32848:33
+      1    3.3%    Function: ^tryParse /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:31229:26
+      1  100.0%      Function: ^parseTypeOrTypePredicate /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:33343:42
+      1  100.0%        Function: ^parseReturnType /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:32638:33
+      1  100.0%          Function: ^parsePropertyOrMethodSignature /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:32789:48
+      1  100.0%            Function: ^parseTypeMember /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:32848:33
+      1    3.3%    Function: ^scanRange /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:12054:27
+      1  100.0%      Function: ^parseJSDocCommentWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:36615:45
+      1  100.0%        Function: ^<anonymous> /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:36588:79
+      1  100.0%          Function: ^doInsideOfContext /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:31048:35
+      1  100.0%            Function: ^parseJSDocComment /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:36584:39
+      1    3.3%    Function: ^pushIfUnique /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:1220:26
+      1  100.0%      LazyCompile: *addDeclarationToSymbol /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43512:40
+      1  100.0%        Function: ^declareSymbol /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43614:31
+      1  100.0%          LazyCompile: *declareSymbolAndAddToSymbolTable /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:44981:50
+      1  100.0%            LazyCompile: *bindWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45526:28
+      1    3.3%    Function: ^parseParameterOrPropertyTag /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:37086:53
+      1  100.0%      Function: ^parseTag /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:36796:34
+      1  100.0%        LazyCompile: *<anonymous> /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:36635:74
+      1  100.0%          LazyCompile: *parseJSDocCommentWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:36615:45
+      1  100.0%            Function: ^<anonymous> /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:36588:79
+      1    3.3%    Function: ^parseObjectTypeMembers /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:32889:40
+      1  100.0%      Function: ^parseInterfaceDeclaration /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:36050:43
+      1  100.0%        Function: ^parseDeclarationWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:35498:40
+      1  100.0%          Function: ^parseDeclaration /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:35461:34
+      1  100.0%            Function: ^parseStatement /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:35387:32
+      1    3.3%    Function: ^parseLiteralLikeNode /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:32390:38
+      1  100.0%      Function: ^parseLiteralNode /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:32369:34
+      1  100.0%        Function: ^parsePrimaryExpression /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:34751:40
+      1  100.0%          Function: ^parseMemberExpressionOrHigher /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:34213:47
+      1  100.0%            Function: ^parseLeftHandSideExpressionOrHigher /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:34150:53
+      1    3.3%    Function: ^isDoubleQuotedString /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:40211:38
+      1  100.0%      Function: ^convertPropertyValueToJson /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:40128:44
+      1  100.0%        Function: ^_loop_4 /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:40063:36
+      1  100.0%          Function: ^convertObjectLiteralExpressionToJson /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:40061:54
+      1  100.0%            Function: ^convertPropertyValueToJson /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:40128:44
+      1    3.3%    Function: ^getNameOfDeclaration /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:12718:34
+      1  100.0%      Function: ^getDeclarationName /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43532:36
+      1  100.0%        Function: ^declareSymbol /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43614:31
+      1  100.0%          Function: ^declareModuleMember /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43735:37
+      1  100.0%            Function: ^bindBlockScopedDeclaration /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45167:44
+      1    3.3%    Function: ^getDeclarationName /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43532:36
+      1  100.0%      Function: ^declareSymbol /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43614:31
+      1  100.0%        LazyCompile: *declareSymbolAndAddToSymbolTable /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:44981:50
+      1  100.0%          Function: ^bindParameter /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:46284:31
+      1  100.0%            Function: ^bindWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45526:28
+      1    3.3%    Function: ^declareModuleMember /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43735:37
+      1  100.0%      Function: ^bindBlockScopedDeclaration /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45167:44
+      1  100.0%        LazyCompile: *bindWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45526:28
+      1  100.0%          LazyCompile: *bind /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45436:22
+      1  100.0%            Function: ^<anonymous> /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43910:38
+      1    3.3%    Function: ^createIdentifier /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:31508:34
+      1  100.0%      Function: ^parseIdentifier /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:31539:33
+      1  100.0%        Function: ^parseTypePredicatePrefix /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:33354:42
+      1  100.0%          LazyCompile: *speculationHelper /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:31188:35
+      1  100.0%            Function: ^tryParse /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:31229:26
+      1    3.3%    Function: ^compileForPublicLoader node:internal/bootstrap/loaders:246:25
+      1  100.0%      Function: ^loadNativeModule node:internal/modules/cjs/helpers:44:26
+      1  100.0%        Function: ^Module._load node:internal/modules/cjs/loader:757:24
+      1  100.0%          Function: ^Module.require node:internal/modules/cjs/loader:991:36
+      1  100.0%            Function: ^require node:internal/modules/cjs/helpers:101:31
+      1    3.3%    Function: ^combinePaths /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:6321:26
+      1  100.0%      Function: ^loadNodeModuleFromDirectoryWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:42698:47
+      1  100.0%        Function: ^loader /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43071:31
+      1  100.0%          Function: ^loadModuleFromSpecificNodeModulesDirectory /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43055:56
+      1  100.0%            Function: ^loadModuleFromImmediateNodeModulesDirectory /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43033:57
+      1    3.3%    Function: ^bindEach /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43912:26
+      1  100.0%      Function: ^visitNodes /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:29873:24
+      1  100.0%        Function: ^forEachChild /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:29907:26
+      1  100.0%          Function: ^bindEachChild /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43919:31
+      1  100.0%            Function: ^bindChildren /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43922:30
+      1    3.3%    Function: ^bindContainer /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43802:31
+      1  100.0%      LazyCompile: *bind /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45436:22
+      1  100.0%        LazyCompile: *forEach /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:388:21
+      1  100.0%          Function: ^bindEach /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43912:26
+      1  100.0%            Function: ^visitNodes /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:29873:24
+      1    3.3%    Function: ^bindChildren /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43922:30
+      1  100.0%      Function: ^bindContainer /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43802:31
+      1  100.0%        LazyCompile: *bind /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45436:22
+      1  100.0%          LazyCompile: *forEach /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:388:21
+      1  100.0%            Function: ^bindEach /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43912:26
+      1    3.3%    Function: ^bind /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:45436:22
+      1  100.0%      Function: ^visitNode /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:29870:23
+      1  100.0%        Function: ^forEachChild /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:29907:26
+      1  100.0%          Function: ^bindEachChild /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43919:31
+      1  100.0%            Function: ^bindChildren /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:43922:30
+      1    3.3%    Function: ^addJSDocComment /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:30876:33
+      1  100.0%      Function: ^withJSDoc /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:30872:27
+      1  100.0%        Function: ^parseFunctionDeclaration /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:35677:42
+      1  100.0%          Function: ^parseDeclarationWorker /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:35498:40
+      1  100.0%            Function: ^parseDeclaration /Users/mirek/prelude/packages/rb-tree/node_modules/typescript/lib/typescript.js:35461:34
+
+     24    1.0%  LazyCompile: *mk file:///Users/mirek/prelude/packages/rb-tree/mjs/prelude.js:12:19
+     20   83.3%    LazyCompile: *balance file:///Users/mirek/prelude/packages/rb-tree/mjs/balance.js:2:17
+     20  100.0%      LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+     20  100.0%        LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+     20  100.0%          LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+     20  100.0%            LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+      3   12.5%    LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+      3  100.0%      LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+      3  100.0%        LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+      3  100.0%          LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+      3  100.0%            LazyCompile: *insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+      1    4.2%    Function: ^insert file:///Users/mirek/prelude/packages/rb-tree/mjs/insert.js:4:16
+      1  100.0%      Function: ^insert file:///Users/mirek/prelude/packages/rb-tree/mjs/rb-tree.js:39:23
+      1  100.0%        Function: ^<anonymous> file:///Users/mirek/prelude/packages/rb-tree/bench/ours.ts:1:1
+      1  100.0%          t _Builtins_GeneratorPrototypeNext
+      1  100.0%            t std::__1::vector<node::BaseObjectPtrImpl<node::BaseObject, false>, std::__1::allocator<node::BaseObjectPtrImpl<node::BaseObject, false> > >::vector(unsigned long)
+
